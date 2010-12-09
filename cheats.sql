@@ -76,6 +76,16 @@ FROM employment_statuses es JOIN
    es.tier2 = esd.employment_status_tier2
 
 
+-- mysql style multi table update
+UPDATE
+   Services s INNER JOIN
+   Task t ON s.ServiceId = t.ServiceId INNER JOIN
+   TaskArg ta ON t.TaskId = ta.TaskId
+SET ta.Value = 'foo'
+WHERE t.TaskType = 'JavaSampleExtraction' AND
+    s.Name IN ('eye3');
+
+
 -- some updates against a fact table from several raw tables, uses cursor etc.
 -- on tsql
 IF NOT EXISTS (SELECT * FROM information_schema.columns WHERE column_name = 'transport_mode' AND table_name = 'traces_fact')
