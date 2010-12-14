@@ -346,3 +346,8 @@ ssh root@$host "mysql -u user -ppassword database -e 'CHECKSUM TABLE IdSequences
 
 -- remote command line execution of a batch of commands
 cat sample.sql | ssh host "mysql -u user -p"
+
+-- simple MySql transaction
+BEGIN;
+-- do your stuff
+COMMIT; -- or ROLLBACK;
