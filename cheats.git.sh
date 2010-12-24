@@ -20,3 +20,9 @@ git merge --no-ff BRANCH
 
 # merge only allow fast forward, fails otherwise
 git merge --ff-only BRANCH
+
+# get an annotated view of a file to determine commit, when, and by who
+git blame FILE
+
+# look at the patch for a commit for a single file
+git log COMMIT -p -1 FILE
