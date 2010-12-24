@@ -11,3 +11,6 @@ git reset --hard HEAD
 
 # to grab a specific file from another branch, will stage it
 git checkout BRANCH FILE
+
+# show commit history tree with ref names
+git log --graph --decorate
