@@ -14,3 +14,9 @@ git checkout BRANCH FILE
 
 # show commit history tree with ref names
 git log --graph --decorate
+
+# merge forcing usage of a merge commit
+git merge --no-ff BRANCH
+
+# merge only allow fast forward, fails otherwise
+git merge --ff-only BRANCH
