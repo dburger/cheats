@@ -58,6 +58,9 @@ find /home/you/backup/ -mtime +30 -exec rm {} \;
 # list files modified 1 or fewer days ago
 find . -type f -mtime -1
 
+# list files modified 5 or fewer minutes ago
+find . -type f -mmin -5
+
 # sort a CSV file by a column, here by column 7
 sort -t',' -k 7 hotspot-list2.txt  > foo.txt
 
