@@ -177,3 +177,6 @@ done
 for host in agpq14 bfgd20 iaco20 ynoo20 ynpp21 ynqq20 ynrr17 ynss21; do
   ssh root@$host "mysql -u user -ppassword database -e 'CHECKSUM TABLE IdSequences'"
 done
+
+# determine the log file a process is writing to, first determine the pid, then
+lsof -p pid | grep log
