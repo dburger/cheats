@@ -180,3 +180,17 @@ done
 
 # determine the log file a process is writing to, first determine the pid, then
 lsof -p pid | grep log
+
+# using dot to draw a directed graph given the input file, piping through tred
+# would give you a transitive reduction
+digraph G {
+  main -> parse -> execute;
+  main -> init;
+  main -> cleanup;
+  execute -> make_string;
+  execute -> printf;
+  init -> make_string;
+  main -> printf;
+  execute -> compare;
+}
+$ dot -Tpng -o deps.png input.dot
