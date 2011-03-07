@@ -24,8 +24,21 @@ while getopts "h:e:" name; do
   case $name in
     h) hosts=$OPTARG;;
     e) eth=$OPTARG;;
+    *) usage;;
   esac
 done
 
 echo "found ${hosts} and ${eth}"
 
+# typical non getopts style parsing of command line arguments
+# with parameter expansion
+cells="foo bar baz"
+command="dumpage"
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --cells=*) cells="${1/--cells=/}";;
+    --command=*) command="${1/--command=/}";;
+    *) usage;;
+  esac
+  shift
+done
