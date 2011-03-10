@@ -351,3 +351,7 @@ cat sample.sql | ssh host "mysql -u user -p"
 BEGIN;
 -- do your stuff
 COMMIT; -- or ROLLBACK;
+
+-- using an IF in an update instead of a CASE when possible - MySql
+UPDATE BugCache
+SET Flags = IF (FIND_IN_SET('bug_has_issues_link', Flags) > 0, 'BugHasIssuesLink', '');
