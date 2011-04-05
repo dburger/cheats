@@ -355,3 +355,17 @@ COMMIT; -- or ROLLBACK;
 -- using an IF in an update instead of a CASE when possible - MySql
 UPDATE BugCache
 SET Flags = IF (FIND_IN_SET('bug_has_issues_link', Flags) > 0, 'BugHasIssuesLink', '');
+
+
+-- changing the way a column is stored when the old was a set
+ALTER TABLE TaskInstance
+ADD TaskZones Enum('Corp', 'Prod', 'All') NOT NULL;
+
+UPDATE TaskInstance
+SET TaskZones = CASE
+    WHEN FIND_IN_SET('RunInCorp', Flags) AND FIND_IN_SET('RunInProd', Flags) THEN 'All'
+    WHEN FIND_IN_SET('RunInCorp', Flags) THEN 'Corp'
+    WHEN FIND_IN_SET('RunInProd', Flags) THEN 'Prod'
+END;
+
+ALTER TABLE TaskInstance DROP Flags;
