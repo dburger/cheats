@@ -369,3 +369,9 @@ SET TaskZones = CASE
 END;
 
 ALTER TABLE TaskInstance DROP Flags;
+
+-- deleting rows from a table with enum column that has no value
+-- this WILL NOT WORK:
+-- DELETE FROM Task WHERE TaskType = '';
+-- this will work
+DELETE FROM Task WHERE TaskType+0 = 0;
