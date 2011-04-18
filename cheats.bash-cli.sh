@@ -194,3 +194,6 @@ digraph G {
   execute -> compare;
 }
 $ dot -Tpng -o deps.png input.dot
+
+# example bulk import change with sed, will leave .BAK backup files
+find . -name "*java" | xargs grep -l "com\.google\.gwt\.event\.shared\.SimpleEventBus" | xargs sed -i.BAK 's/com\.google\.gwt\.event\.shared\.SimpleEventBus/com.google.web.bindery.event.shared.SimpleEventBus/'
