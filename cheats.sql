@@ -375,3 +375,8 @@ ALTER TABLE TaskInstance DROP Flags;
 -- DELETE FROM Task WHERE TaskType = '';
 -- this will work
 DELETE FROM Task WHERE TaskType+0 = 0;
+
+
+-- rename a column and modify type
+ALTER TABLE FullStackTraceDim
+CHANGE LanguageSet Languages SET('Java', 'Cpp', 'Js', 'Python') NOT NULL DEFAULT 'Java';
