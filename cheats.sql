@@ -370,6 +370,7 @@ END;
 
 ALTER TABLE TaskInstance DROP Flags;
 
+
 -- deleting rows from a table with enum column that has no value
 -- this WILL NOT WORK:
 -- DELETE FROM Task WHERE TaskType = '';
@@ -381,6 +382,7 @@ DELETE FROM Task WHERE TaskType+0 = 0;
 ALTER TABLE FullStackTraceDim
 CHANGE LanguageSet Languages SET('Java', 'Cpp', 'Js', 'Python') NOT NULL DEFAULT 'Java';
 
+
 -- select services in corp that are active
 SELECT s.Name, sa1.Value AS zone, sa2.Value AS description, sa3.Value AS status FROM
    Services s
@@ -388,3 +390,7 @@ SELECT s.Name, sa1.Value AS zone, sa2.Value AS description, sa3.Value AS status 
    LEFT JOIN ServiceArg sa2 ON s.ServiceId = sa2.ServiceId AND sa2.ArgId = 7101
    LEFT JOIN ServiceArg sa3 ON s.ServiceId = sa3.ServiceId AND sa3.ArgId = 7001
 WHERE sa3.Value IS NULL OR sa3.Value = 'Active';
+
+
+-- simply rename a table in mysql
+RENAME TABLE XmlConfig TO XXX_XmlConfig;
