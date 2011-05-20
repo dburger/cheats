@@ -202,3 +202,6 @@ find . -name "*java" | xargs grep -l "com\.google\.gwt\.event\.shared\.SimpleEve
 grep "^110513 04.*Task completed in" gse.log | \
     sed 's/^.*Task completed in \([0-9]*\) .*$/\1/' | \
     awk '{total+=$1; count+=1} END {print total/count}'
+
+# grep for counts of event during each 10 minute time frame in the 1 am hour
+for x in 0 1 2 3 4 5; do grep "^110520 03:${x}.*Task completed" gse.log  | wc -l; done
