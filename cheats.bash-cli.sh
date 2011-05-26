@@ -205,3 +205,6 @@ grep "^110513 04.*Task completed in" gse.log | \
 
 # grep for counts of event during each 10 minute time frame in the 1 am hour
 for x in 0 1 2 3 4 5; do grep "^110520 03:${x}.*Task completed" gse.log  | wc -l; done
+
+# show the lines common to file1 and file2
+comm -12 <(sort file1) <(sort file2)
