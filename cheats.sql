@@ -394,3 +394,6 @@ WHERE sa3.Value IS NULL OR sa3.Value = 'Active';
 
 -- simply rename a table in mysql
 RENAME TABLE XmlConfig TO XXX_XmlConfig;
+
+-- create a table by copying another table
+CREATE TABLE student2 SELECT * FROM student;
