@@ -397,3 +397,17 @@ RENAME TABLE XmlConfig TO XXX_XmlConfig;
 
 -- create a table by copying another table
 CREATE TABLE student2 SELECT * FROM student;
+
+-- example of insert select with creation of string representing random time from
+-- 1:00am to 4:59am
+INSERT INTO Task (ServiceId, TaskType, StartEvent, TimeInterval, RepeatCount, TaskGroup)
+SELECT
+    s.ServiceId,
+    'VarzAggregation',
+    CONCAT(SUBSTRING(FLOOR(1 + RAND() * 4), 1, 1),
+           ':',
+           LPAD(SUBSTRING(FLOOR(0 + RAND() * 59), 1, 2), 2, '0'), 'am'),
+    0,
+    1,
+    0
+FROM Services s;
