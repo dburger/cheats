@@ -431,3 +431,14 @@ FROM
 WHERE
     t.TaskType IN ('SqlAggregation', 'VarzAggregation') AND
     ta.Value IS NULL;
+
+-- example of generating your own sequence in cases where the primary key
+-- is an integer but not autoincrement, such as managed by ORM
+INSERT INTO Task (TaskId, ServiceId, TaskType, StartEvent, TimeInterval, RepeatCount, TaskGroup)
+SELECT @row := @row + 1, s.ServiceId, 'SqlAggregation',
+       CONCAT(SUBSTRING(FLOOR(1 + RAND() * 4), 1, 1),
+       ':',
+       LPAD(SUBSTRING(FLOOR(0 + RAND() * 59), 1, 2), 2, '0'), 'am'), 0, 1, 0
+FROM Services s, (SELECT @row := 17483) r;
+-- don't forget to fix up you sequence number
+UPDATE IdSequences SET LastId = 20047 WHERE TableName = 'Task';
