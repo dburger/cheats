@@ -411,3 +411,23 @@ SELECT
     1,
     0
 FROM Services s;
+
+-- select certain type of tasks without corresponding related row
+SELECT * FROM
+    Task t LEFT JOIN
+    TaskArg ta ON t.TaskId = ta.TaskId AND ta.ArgId = 7007
+WHERE
+    t.TaskType IN ('SqlAggregation', 'VarzAggregation') AND
+    (ta.Value = 'prod' OR ta.Value IS NULL);
+
+-- use selection above for an insert to fix them up, note only if
+-- TaskArg does not exist because if 'prod' then need to update
+-- instead
+INSERT INTO TaskArg (TaskId, ArgId, Value)
+SELECT t.TaskId, 7007, 'corp'
+FROM
+    Task t LEFT JOIN
+    TaskArg ta ON t.TaskId = ta.TaskId AND ta.ArgId = 7007
+WHERE
+    t.TaskType IN ('SqlAggregation', 'VarzAggregation') AND
+    ta.Value IS NULL;
