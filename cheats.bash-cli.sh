@@ -208,3 +208,8 @@ for x in 0 1 2 3 4 5; do grep "^110520 03:${x}.*Task completed" gse.log  | wc -l
 
 # show the lines common to file1 and file2
 comm -12 <(sort file1) <(sort file2)
+
+# handling spaces in file names when piping from find to xargs
+# causes null terminated separation, either way
+find . -name "*.foo" -print0 | xargs --null ls -l
+find . -name "*.foo" -print0 | xargs -0 ls -l
