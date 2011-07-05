@@ -213,3 +213,6 @@ comm -12 <(sort file1) <(sort file2)
 # causes null terminated separation, either way
 find . -name "*.foo" -print0 | xargs --null ls -l
 find . -name "*.foo" -print0 | xargs -0 ls -l
+
+# prune a path from a find before the rest of the matching
+find . -path ./review -prune -o -name "*java"
