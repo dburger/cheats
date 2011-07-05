@@ -14,6 +14,11 @@ permutations <- function(n, r) {
 # (q) quantile
 # (r) random
 
+# some of the common distribution functions are
+# (binom) binomial distribution
+# (pois) poisson distribution
+# (norm) normal distribution
+
 # for example the binomial distribution name is binom calculate the probability
 # of an 80% free throw shooter hitting 5 out of 10 shots
 > dbinom(5, 10, .8)
