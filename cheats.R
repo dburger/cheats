@@ -39,3 +39,13 @@ permutations <- function(n, r) {
 # is the probability that 175 or fewer cars pass in an hour
 > ppois(190, lambda=200)
 [1] 0.2529326
+
+# if a group of students averaged 80.0 on a test with a standard deviation
+# of 8, what is the likely percentage of students that scored between 75.0
+# and 80.0
+> pnorm(85, 80, 8) - pnorm(75, 80, 8)
+[1] 0.4680289
+
+# and what percentage of students are expected to score below 40.0
+> pnorm(40, 80, 8)
+[1] 2.866516e-07
