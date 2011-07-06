@@ -1,9 +1,11 @@
 # definiting a simple function
+# (of course you don't need to do this, use choose(n, k) built in)
 combinations <- function(n, r) {
   return (factorial(n) / (factorial(r) * factorial(n - r)));
 }
 
 # and you can't show combinations without permutations
+# (I'm not sure what the built in is for this)
 permutations <- function(n, r) {
   return (factorial(n) / factorial(n - r));
 }
