@@ -49,3 +49,9 @@ permutations <- function(n, r) {
 # and what percentage of students are expected to score below 40.0
 > pnorm(40, 80, 8)
 [1] 2.866516e-07
+
+# if the mean of heights for a set of boys is 143.5 cm and standard
+# deviation of 7.1 cm what is the probability that a randomly chosen
+# boy is taller than 157.7 cm
+> 1 - pnorm(157.7, 143.5, 7.1)
+[1] 0.02275013
