@@ -57,3 +57,17 @@ permutations <- function(n, r) {
 # boy is taller than 157.7 cm
 > 1 - pnorm(157.7, 143.5, 7.1)
 [1] 0.02275013
+
+# create a sequence from 1 to 10
+# sample 5000 values from the sequence
+# separate the samples into 10 rows (500 cols)
+# create a vector of the means of each column
+# draw a histogram of the means
+# show the variance and standard deviation of the means
+> v <- seq(1, 10)
+> draws <- sample(v, size=10*500, replace=TRUE)
+> draws <- matrix(draws, 10)
+> means <- apply(draws, 2, mean)
+> hist(means)
+> var(means)
+> sd(means)
