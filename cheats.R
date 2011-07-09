@@ -44,7 +44,7 @@ permutations <- function(n, r) {
 
 # if a group of students averaged 80.0 on a test with a standard deviation
 # of 8, what is the likely percentage of students that scored between 75.0
-# and 80.0
+# and 80.0 if we assume a normal distribution
 > pnorm(85, 80, 8) - pnorm(75, 80, 8)
 [1] 0.4680289
 
@@ -54,7 +54,7 @@ permutations <- function(n, r) {
 
 # if the mean of heights for a set of boys is 143.5 cm and standard
 # deviation of 7.1 cm what is the probability that a randomly chosen
-# boy is taller than 157.7 cm
+# boy is taller than 157.7 cm if we assume a normal distribution
 > 1 - pnorm(157.7, 143.5, 7.1)
 [1] 0.02275013
 
@@ -71,3 +71,13 @@ permutations <- function(n, r) {
 > hist(means)
 > var(means)
 > sd(means)
+
+# average man drinks 2L of water in day with standard deviation of
+# .7L.  If you are planning a trip for 50 men and bringing 110L of
+# water, what is the change you will run out?
+# Sampling distribution produces a normal distribution for these
+# values and the standard deviation
+# = population standard deviation / square root # of samples
+> samplesd <- .7 / sqrt(50)
+> 1 - pnorm(2.2, 2, samplesd)
+[1] 0.02167588
