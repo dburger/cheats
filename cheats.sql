@@ -392,12 +392,6 @@ SELECT s.Name, sa1.Value AS zone, sa2.Value AS description, sa3.Value AS status 
 WHERE sa3.Value IS NULL OR sa3.Value = 'Active';
 
 
--- simply rename a table in mysql
-RENAME TABLE XmlConfig TO XXX_XmlConfig;
-
--- create a table by copying another table
-CREATE TABLE student2 SELECT * FROM student;
-
 -- example of insert select with creation of string representing random time from
 -- 1:00am to 4:59am
 INSERT INTO Task (ServiceId, TaskType, StartEvent, TimeInterval, RepeatCount, TaskGroup)
@@ -411,6 +405,7 @@ SELECT
     1,
     0
 FROM Services s;
+
 
 -- select certain type of tasks without corresponding related row
 SELECT * FROM
@@ -432,6 +427,7 @@ WHERE
     t.TaskType IN ('SqlAggregation', 'VarzAggregation') AND
     ta.Value IS NULL;
 
+
 -- example of generating your own sequence in cases where the primary key
 -- is an integer but not autoincrement, such as managed by ORM
 INSERT INTO Task (TaskId, ServiceId, TaskType, StartEvent, TimeInterval, RepeatCount, TaskGroup)
@@ -442,3 +438,20 @@ SELECT @row := @row + 1, s.ServiceId, 'SqlAggregation',
 FROM Services s, (SELECT @row := 17483) r;
 -- don't forget to fix up you sequence number
 UPDATE IdSequences SET LastId = 20047 WHERE TableName = 'Task';
+
+
+-- simply rename a table in mysql
+RENAME TABLE XmlConfig TO XXX_XmlConfig;
+
+
+-- create a table by copying another table
+CREATE TABLE student2 SELECT * FROM student;
+
+
+-- copy a table
+CREATE TABLE TempFoo SELECT * FROM Foo;
+
+
+-- copy a table and copy the indices
+CREATE TABLE TempFoo LIKE Foo;
+INSERT INTO TempFoo SELECT * FROM Foo;
