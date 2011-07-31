@@ -1,3 +1,45 @@
+# how to find and install a package, first search for what you are
+# looking for on rseek.org - (here looking for skew and kurtosis)
+# then install:
+> intsall.packages("moments")
+# then you can load and use the library
+> load("moments")
+> skewness(c(1, 2, 3, 4, 5))
+[1] 0
+> kurtosis(c(1, 2, 3, 4, 5))
+[1] 1.7
+
+# entering a frequency distribution, say you have:
+# value || count
+#     0 ||     2
+#     1 ||     5
+#     2 ||     9
+#     3 ||     4
+#     4 ||     1
+# can put in a vector with:
+> v <- c(rep(0,2), rep(1,5), rep(2,9), rep(3,4), rep(4,1))
+# or
+> v <- rep(c(0,1,2,3,4), c(2,5,9,4,1))
+
+# but say you have the data in a file, ways to roll values
+# with dice for example dice.txt:
+2 1
+3 2
+4 3
+5 4
+6 5
+7 6
+8 5
+9 4
+10 3
+11 2
+12 1
+# read the data and make the vector of values
+> data <- read.table("dice.txt")
+> v <- rep(data$V1, data$V2)
+> sd(v)
+[1] 2.449490
+
 # definiting a simple function
 # (of course you don't need to do this, use choose(n, k) built in)
 combinations <- function(n, r) {
