@@ -123,3 +123,20 @@ permutations <- function(n, r) {
 > samplesd <- .7 / sqrt(50)
 > 1 - pnorm(2.2, 2, samplesd)
 [1] 0.02167588
+
+# covariance and correlation coefficent
+> x <- c(1, 2, 3, 4, 5, 6)
+> y <- 2 * x
+> y
+[1]  2  4  6  8 10 12
+> cov(x, y)
+[1] 7
+> cor(x, y)
+[1] 1
+> y <- x^2
+> y
+[1]  1  4  9 16 25 36
+> cov(x, y)
+[1] 24.5
+> cor(x, y)
+[1] 0.9789173
