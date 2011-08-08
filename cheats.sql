@@ -455,3 +455,17 @@ CREATE TABLE TempFoo SELECT * FROM Foo;
 -- copy a table and copy the indices
 CREATE TABLE TempFoo LIKE Foo;
 INSERT INTO TempFoo SELECT * FROM Foo;
+
+
+-- example of MySQL modulo operator to update in batches of
+-- ten, first batch
+UPDATE
+  Task t INNER JOIN
+  TaskInstance ti ON t.TaskId = ti.TaskId
+SET
+  ti.StartTime = NOW()
+WHERE
+  t.TaskType = 'Analysis' AND
+  t.StartEvent NOT IN ('CANARY', 'NONE', 'PUSH') AND
+  t.StartEvent NOT LIKE '% %' AND
+  ti.TaskInstanceId % 10 = 0;
