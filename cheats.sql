@@ -528,3 +528,19 @@ BEGIN
 END |
 -- usage
 SELECT MOVE_TASKS(6, 'Analysis', 'prod', 1);
+
+
+-- just a nice useful query with several joins
+
+SELECT t.ServiceId, s.Name, sa1.Value, t.TaskId, t.TaskType, COALESCE(ta.Value, sa2.Value, 'prod') as zone
+  FROM Task t JOIN
+  Services s ON t.ServiceId = s.ServiceId LEFT JOIN
+  ServiceArg sa1 ON t.ServiceId = sa1.ServiceId AND sa1.ArgId = 7001 LEFT JOIN
+  TaskArg ta ON t.TaskId = ta.TaskId AND ta.ArgId = 7007 LEFT JOIN
+  ServiceArg sa2 ON t.ServiceId = sa2.ServiceId AND sa2.ArgId = 7007
+WHERE
+  COALESCE(ta.Value, sa2.Value, 'prod') = 'corp' AND
+  (sa1.Value IS NULL OR sa1.Value = 'Active')
+ORDER BY t.ServiceId;
+
+  t.TaskType NOT IN ('ExceptionExtraction', 'HeapzGarbageExtraction', 'JavaSampleExtraction', 'SqlExtraction', 'VarzExtraction');
