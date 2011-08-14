@@ -469,3 +469,62 @@ WHERE
   t.StartEvent NOT IN ('CANARY', 'NONE', 'PUSH') AND
   t.StartEvent NOT LIKE '% %' AND
   ti.TaskInstanceId % 10 = 0;
+
+
+-- example multi-step mysql function
+
+DELIMITER |
+DROP FUNCTION IF EXISTS MOVE_TASKS |
+CREATE FUNCTION MOVE_TASKS(service_id INT, task_type VARCHAR(255), task_zone VARCHAR(255), task_group INT)
+  RETURNS VARCHAR(255)
+  DETERMINISTIC
+BEGIN
+  DECLARE default_task_zone VARCHAR(255);
+  DECLARE num INT;
+  DECLARE result VARCHAR(255);
+
+  -- figure out what the default task zone is for the service if no
+  -- task arg overrides are involved
+  SELECT COALESCE(sa.Value, a.DefaultValue) INTO default_task_zone
+  FROM Arg a LEFT JOIN ServiceArg sa
+  ON a.ArgId = sa.ArgId AND sa.ServiceId = service_id
+  WHERE a.ArgId = 7007;
+
+  SET result = CONCAT_WS(' ', service_id, default_task_zone);
+
+  -- delete all the current allowed task zone task args, we'll figure
+  -- out if we need to recreate them in the next step
+  DELETE ta
+  FROM Task t LEFT JOIN TaskArg ta
+  ON t.TaskId = ta.TaskId AND ta.ArgId = 7007
+  WHERE t.TaskType = task_type AND t.ServiceId = service_id;
+
+  SELECT ROW_COUNT() INTO num;
+
+  SET result = CONCAT_WS(' ', result, num);
+
+  SET num = 0;
+  -- if the default task zone for the service does not match the requested
+  -- zone, then set up task arg overrides for the tasks
+  IF default_task_zone <> task_zone THEN
+    INSERT INTO TaskArg (TaskId, ArgId, Value)
+    SELECT TaskId, 7007, task_zone
+    FROM Task
+    WHERE TaskType = task_type AND ServiceId = service_id;
+
+    SELECT ROW_COUNT() INTO num;
+  END IF;
+
+  SET result = CONCAT_WS(' ', result, num);
+
+  -- update the tasks to have the requested task group
+  UPDATE Task SET TaskGroup = task_group
+  WHERE ServiceId = service_id AND TaskType = task_type;
+
+  SELECT ROW_COUNT() INTO num;
+  SET result = CONCAT_WS(' ', result, num);
+
+  RETURN result;
+END |
+-- usage
+SELECT MOVE_TASKS(6, 'Analysis', 'prod', 1);
