@@ -542,5 +542,3 @@ WHERE
   COALESCE(ta.Value, sa2.Value, 'prod') = 'corp' AND
   (sa1.Value IS NULL OR sa1.Value = 'Active')
 ORDER BY t.ServiceId;
-
-  t.TaskType NOT IN ('ExceptionExtraction', 'HeapzGarbageExtraction', 'JavaSampleExtraction', 'SqlExtraction', 'VarzExtraction');
