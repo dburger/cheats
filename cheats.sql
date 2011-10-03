@@ -542,3 +542,10 @@ WHERE
   COALESCE(ta.Value, sa2.Value, 'prod') = 'corp' AND
   (sa1.Value IS NULL OR sa1.Value = 'Active')
 ORDER BY t.ServiceId;
+
+-- your basic multi aliased table join, service and application counts
+SELECT sc.ServiceId, ac.ApplicationId sc.Count, ac.Count
+  FROM
+  (SELECT COUNT(*) count, ServiceId FROM ServerDim GROUP BY ServiceId) sc JOIN
+  (SELECT COUNT(*) count, ApplicationId FROM ServerDim GROUP By ServiceId, ApplicationId) ac
+  ON sc.ServiceId = ac.ServiceId;
