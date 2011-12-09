@@ -199,6 +199,9 @@ ALTER TABLE Services ADD Family VARCHAR(128) NOT NULL;
 
 -- mysql delete from one table where the related row does not exist in the other
 DELETE ti FROM TaskInstance ti LEFT JOIN Task t ON ti.TaskId = t.TaskId WHERE t.TaskId IS NULL;
+DELETE sa FROM ServiceArg sa LEFT JOIN Services s ON sa.ServiceId = s.ServiceId WHERE s.ServiceId IS NULL;
+DELETE ta FROM TaskArg ta LEFT JOIN Task t ON ta.TaskId = t.TaskId WHERE t.TaskId IS NULL;
+DELETE tia FROM TaskInstanceArg tia LEFT JOIN TaskInstance ti ON tia.TaskInstanceId = ti.TaskInstanceId WHERE ti.TaskInstanceId IS NULL;
 
 
 -- mysql create a table for a select, different from the sybase (microsoft) extension
