@@ -546,9 +546,21 @@ WHERE
   (sa1.Value IS NULL OR sa1.Value = 'Active')
 ORDER BY t.ServiceId;
 
+
 -- your basic multi aliased table join, service and application counts
 SELECT sc.ServiceId, ac.ApplicationId sc.Count, ac.Count
   FROM
   (SELECT COUNT(*) count, ServiceId FROM ServerDim GROUP BY ServiceId) sc JOIN
   (SELECT COUNT(*) count, ApplicationId FROM ServerDim GROUP By ServiceId, ApplicationId) ac
   ON sc.ServiceId = ac.ServiceId;
+
+
+-- some example DDL, changing primary keys, dropping / adding indices
+ALTER TABLE PrecomputedAggregates ADD COLUMN ServiceId INTEGER NOT NULL;
+UPDATE PrecomputedAggregates pa, Services s SET pa.ServiceId = s.ServiceId WHERE pa.ServiceName = s.Name;
+ALTER TABLE PrecomputedAggregates DROP PRIMARY KEY;
+ALTER TABLE PrecomputedAggregates ADD PRIMARY KEY (ServiceId, BuildTime, SnippetHash, Hour);
+DROP INDEX ServiceSnippetHour ON PrecomputedAggregates;
+CREATE INDEX ServiceSnippetHour ON PrecomputedAggregates (ServiceId, SnippetHash, Hour);
+DROP INDEX ServiceHour ON PrecomputedAggregates;
+CREATE INDEX ServiceHour ON PrecomputedAggregates (ServiceId, Hour);
