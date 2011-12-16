@@ -52,6 +52,18 @@ permutations <- function(n, r) {
   return (factorial(n) / factorial(n - r));
 }
 
+# birthday paradox function, full, does not handle large values
+# (won't handle 365 days for example)
+birthday <- function(n, r) {
+  return (1 - factorial(n) / (factorial(n - r) * n^r));
+}
+
+# birthday paradox function, simplified, but still can't handle
+# really large values
+birthday <- function(n, r) {
+  return (1 - prod((n - r + 1):n) / n^r);
+}
+
 # probability distributions have a unique name with a prefix indicating
 # (d) density
 # (p) distribution
