@@ -64,6 +64,12 @@ birthday <- function(n, r) {
   return (1 - prod((n - r + 1):n) / n^r);
 }
 
+# birthday paradox function, move the calculation of n^r into the
+# prod, this should handle much larger numbers
+birthay <- function(n, r) {
+  return (1 - prod(((n - r + 1):n) / n));
+}
+
 # probability distributions have a unique name with a prefix indicating
 # (d) density
 # (p) distribution
