@@ -66,7 +66,7 @@ birthday <- function(n, r) {
 
 # birthday paradox function, move the calculation of n^r into the
 # prod, this should handle much larger numbers
-birthay <- function(n, r) {
+birthday <- function(n, r) {
   return (1 - prod(((n - r + 1):n) / n));
 }
 
