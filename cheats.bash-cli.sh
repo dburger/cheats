@@ -216,3 +216,6 @@ find . -name "*.foo" -print0 | xargs -0 ls -l
 
 # prune a path from a find before the rest of the matching
 find . -path ./review -prune -o -name "*java"
+
+# example one line while
+while true; do ls; echo "sleeping"; sleep 5; done
