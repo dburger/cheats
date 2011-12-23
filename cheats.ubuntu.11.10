@@ -22,15 +22,14 @@ Type=Application
 
 (https://bugs.launchpad.net/debian/+source/lightdm/+bug/818864)
 
-8. curl http://download.oracle.com/otn-pub/java/jdk/7u2-b13/jdk-7u2-linux-i586.tar.gz -O
-   mkdir ~/tools
-   mv jdk-7u2-linux-i586.tar.gz ~/tools/
+8. mkdir ~/tools
    cd ~/tools
+   curl http://download.oracle.com/otn-pub/java/jdk/7u2-b13/jdk-7u2-linux-i586.tar.gz -O
    tar -xvzf jdk-7u2-linux-i586.tar.gz
 
-9. curl http://download-ln.jetbrains.com/idea/ideaIC-11.tar.gz -O
-   mv ideaIC-11.tar.gz ~/tools/
+9. mkdir ~/tools
    cd ~/tools
+   curl http://download-ln.jetbrains.com/idea/ideaIC-11.tar.gz -O
    tar -xvzf ideaIC-11.tar.gz
 
    will need the IDEA_JDK variable
