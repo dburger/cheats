@@ -1,0 +1,38 @@
+# my configuration set up for ubuntu 11.10
+# for now a list, later a script
+
+1. download / install chrome
+2. sudo apt-get install emacs git git-gui xclip r-base awesome
+        graphviz feh mpg321 irssi curl
+        suckless-tools (for wmname awesome java work around)
+3. gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
+4. gconftool-2 --set "/apps/gnome-terminal/global/use_mnemonics" --type boolean false
+5. clone bin and dotfiles from github
+6. symlink the needed (Xsession to start)
+
+7. drop the following as a desktop entry in
+   /usr/share/xsessions, call it xsession.desktop
+
+[Desktop Entry]
+Version=1.0
+Name=Default Xsession
+Exec=default
+Icon=
+Type=Application
+
+(https://bugs.launchpad.net/debian/+source/lightdm/+bug/818864)
+
+8. curl http://download.oracle.com/otn-pub/java/jdk/7u2-b13/jdk-7u2-linux-i586.tar.gz -O
+   mkdir ~/tools
+   mv jdk-7u2-linux-i586.tar.gz ~/tools/
+   cd ~/tools
+   tar -xvzf jdk-7u2-linux-i586.tar.gz
+
+9. curl http://download-ln.jetbrains.com/idea/ideaIC-11.tar.gz -O
+   mv ideaIC-11.tar.gz ~/tools/
+   cd ~/tools
+   tar -xvzf ideaIC-11.tar.gz
+
+   will need the IDEA_JDK variable
+
+look in .xsession-errors for start up errors
