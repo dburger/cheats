@@ -1,0 +1,12 @@
+# bc can have function definitions too!
+# can load from a file with bc filename, load as
+# bc -l filename to also define the standard mathlib
+
+# standard birthday paradox approximation function
+define p(n, m) {
+return 1 - e( (-(n * (n-1))) / (2*m))
+}
+
+# what is likelihood of collision of birthdays for 23 people?
+p(23, 365)
+.50000175218271061853
