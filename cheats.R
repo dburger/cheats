@@ -52,6 +52,9 @@ permutations <- function(n, r) {
   return (factorial(n) / factorial(n - r));
 }
 
+# birthday paradox function in three versions, from worst to
+# best, with R's built in birthday functions demoed below.
+
 # birthday paradox function, full, does not handle large values
 # (won't handle 365 days for example)
 birthday <- function(n, r) {
@@ -69,6 +72,30 @@ birthday <- function(n, r) {
 birthday <- function(n, r) {
   return (1 - prod(((n - r + 1):n) / n));
 }
+
+# note that R's birthday functions use approximations
+
+# using built in, what is probablity of 2 or more conflicts for
+# birthdays with 23 people
+> pbirthday(23)
+[1] 0.5009262
+
+# more complex usage, if there are 100 different classes and you
+# want to know the the likelihood of 5 or more collisions when
+# selecting 30
+> pbirthday(30, classes=100, coincident=5)
+[1] 0.001577866
+
+# how many people does there need to be to have a 70 percent
+# chance of a birthday collision?
+> qbirthday(prob=.7)
+[1] 31
+
+# more complex usage, how many selections does there need to be
+# to have a 12 percent change of 3 or more collisions from a
+# selection out of 100 classes?
+> qbirthday(prob=.12, classes=100, coincident=3)
+[1] 21
 
 # probability distributions have a unique name with a prefix indicating
 # (d) density
