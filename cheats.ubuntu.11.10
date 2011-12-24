@@ -9,18 +9,17 @@
 4. gconftool-2 --set "/apps/gnome-terminal/global/use_mnemonics" --type boolean false
 5. clone bin and dotfiles from github
 6. symlink the needed (Xsession to start)
-
-7. drop the following as a desktop entry in
-   /usr/share/xsessions, call it xsession.desktop
-
-[Desktop Entry]
-Version=1.0
-Name=Default Xsession
-Exec=default
-Icon=
-Type=Application
-
+7. set up for xsessions
 (https://bugs.launchpad.net/debian/+source/lightdm/+bug/818864)
+
+sudo su -c cat <<EOF > /usr/share/xsessions/xsession.desktop                                                                                 
+[Desktop Entry]                                                                                                
+Version=1.0                                                                                                    
+Name=Default Xsession                                                                                          
+Exec=default                                                                                                   
+Icon=                                                                                                          
+Type=Application                                                                                               
+EOF
 
 8. mkdir ~/tools
    cd ~/tools
