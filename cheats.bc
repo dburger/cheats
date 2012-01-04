@@ -4,9 +4,25 @@
 
 # standard birthday paradox approximation function
 define p(n, m) {
-return 1 - e( (-(n * (n-1))) / (2*m))
+  return 1 - e( (-(n * (n-1))) / (2*m))
 }
 
 # what is likelihood of collision of birthdays for 23 people?
 p(23, 365)
 .50000175218271061853
+
+# my version of the birthday paradox
+define birthday(n, r) {
+  prod = 1
+  i = n
+  while (i > n - r) {
+    prod = prod * i / n
+    i = i - 1
+  }
+  return 1 - prod
+}
+
+# what is likelihood of collision of birthdays for 23 people?
+scale = 10
+birthday(365, 23)
+.5072972352
