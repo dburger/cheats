@@ -16,8 +16,7 @@ define birthday(n, r) {
   prod = 1
   i = n
   while (i > n - r) {
-    prod = prod * i / n
-    i = i - 1
+    prod *= i-- / n
   }
   return 1 - prod
 }
