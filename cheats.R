@@ -185,3 +185,10 @@ birthday <- function(n, r) {
 [1] 24.5
 > cor(x, y)
 [1] 0.9789173
+
+# compute an empirical cumulative distribution function
+> ecdf(c(1, 2, 3, 4))
+# compute an ecdf from 20 random samples from a normal distribution
+> ecdf(rnorm(20))
+# plot the ecdf of 1000 random samples from a normal distribution
+> plot(ecdf(rnorm(1000)))
