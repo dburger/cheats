@@ -564,3 +564,16 @@ DROP INDEX ServiceSnippetHour ON PrecomputedAggregates;
 CREATE INDEX ServiceSnippetHour ON PrecomputedAggregates (ServiceId, SnippetHash, Hour);
 DROP INDEX ServiceHour ON PrecomputedAggregates;
 CREATE INDEX ServiceHour ON PrecomputedAggregates (ServiceId, Hour);
+
+# dumping data into a file, the fields terminated by, lines terminated by
+# aren't strictly necessary but may be helpful if you have string fields
+# that contain certain characters
+SELECT
+  a, b, c
+FROM
+  table
+INTO OUTFILE '/tmp/foo.csv'
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n';
+
+# loading data from a file
