@@ -577,3 +577,7 @@ FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n';
 
 # loading data from a file
+LOAD DATA INFILE '/export/hda3/mysql/dump.csv'
+INTO TABLE Foozer
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n';
