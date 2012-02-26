@@ -40,6 +40,36 @@
 > sd(v)
 [1] 2.449490
 
+# say you have the data in some kind of separated values file
+1,2,3,4
+4,3,2,1
+9,9,9,9
+# read the data, no header, comma separator
+> data <- read.csv(file="xamp.csv",head=FALSE,sep=",")
+> data
+  V1 V2 V3 V4
+1  1  2  3  4
+2  4  3  2  1
+3  9  9  9  9
+# and then address a specific column
+> mean(data$V1)
+[1] 4.666667
+
+# and of course if the data has headers
+height,weight,speed,distance
+1,2,3,4
+4,3,2,1
+9,9,9,9
+# then when you read you can use those as column identifiers
+> data <- read.csv(file="xamp.csv",head=TRUE,sep=",")
+> data
+  height weight speed distance
+1      1      2     3        4
+2      4      3     2        1
+3      9      9     9        9
+> data$height
+[1] 1 4 9
+
 # definiting a simple function
 # (of course you don't need to do this, use choose(n, k) built in)
 combinations <- function(n, r) {
