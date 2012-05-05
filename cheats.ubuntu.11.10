@@ -11,6 +11,7 @@
 6. symlink the needed (Xsession to start)
 7. set up for xsessions
 (https://bugs.launchpad.net/debian/+source/lightdm/+bug/818864)
+8. gsettings set org.gnome.desktop.interface ubuntu-overlay-scrollbars false
 
 sudo su -c cat <<EOF > /usr/share/xsessions/xsession.desktop                                                                                 
 [Desktop Entry]                                                                                                
