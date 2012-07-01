@@ -1,5 +1,12 @@
 # examples, examples, and more examples?
 
+# show defualt file permissions, bit on means does not get
+umask
+0027
+
+# change mask so that everyone gets read and execute but not write
+umask 0022
+
 # rename a bunch of files from a prefix + number to just the number
 ls QuizUI_* | sed 's/Quiz\(UI_[0-9][0-9]\.png\)/mv Quiz\1 \1/' | sh
 
