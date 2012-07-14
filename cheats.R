@@ -222,3 +222,124 @@ birthday <- function(n, r) {
 > ecdf(rnorm(20))
 # plot the ecdf of 1000 random samples from a normal distribution
 > plot(ecdf(rnorm(1000)))
+
+# from two minute tutorials
+$ option(digits = 22)
+$ x <- c(1, 2, 3)
+$ 10:20
+$ length(v)
+$ class(v)
+$ is.numeric(x)
+$ v[2]
+$ y <- v[4:8]
+$ df <- data.frame(
+    names = c("x", "y", "z"),
+    parties = c(1, 2, 3))
+$ v[2,]
+$ v[1:2,]
+$ install.packages("name")
+$ library(name)
+$ ?func
+$ seq(from = 0, to = 10, by = 2)
+$ df <- read.csv("...")
+$ getwd()
+$ setwd("...")
+$ head(df)
+$ tail(df)
+$ T, F
+$ !
+$ if, else
+$ for (i in 1:3)
+$ gsub, paste(sep = " ")
+$ as.character(x)
+$ as.numeric(x)
+$ as.logical(x)
+r-help, r-bloggers web sites
+$ data(mtcars)
+$ mtcars[,"cyl"]
+$ mtcars[(mtcars[,"cyl"] == 6),]
+$ ifelse(x, "true", "false")
+$ mtcars[,"newcol"] <- ifelse (conditional, true, false)
+$ paste("hi", v)
+$ paste("hi", v, collapse = "")
+$ paste("hi", "there", sep = ":")
+$ outer(v1, v2, FUN = f, sep = ":")
+$ mean, median, mode, quantile
+$ summary
+$ quantile(v, prob = .9)
+$ quantile(v, type = 3)
+$ sum
+$ try(x, silent = T)
+$ try({...}, silent = T)
+$ e <- try(...
+$ if (class(e) == "try-error")
+$ table(mtcars$cyl)
+$ ftable(...)
+$ fix(mtcars)
+$ mtcars <- transform(mtcars, newcol = 2 * oldcol)
+$ sort(u), sort(u, decreasing = T)
+$ mtcars[order(mtcars$wt),]
+$ x <- sqldf("select ...")
+$ merge(df1, df2, by = "column")
+right and left join by all parameter
+$ cbind = join tables
+$ rbind = stacks tables
+$ tapply(mtcars$mpg, mtcars$gear, mean) # groups by 2nd
+$ tapply(mtcars$hp, mtcars$cyl, quantile, prob = .8)
+$ aggregate(mtcars$mpg, by = list(mtcars$gear), mean)
+$ na.rm = T
+$ is.na(x)
+$ z[is.na(z$rc), "rc"] <- 0
+$ %in%, ?"%in%"
+$ names(mtcars)
+$ names(mtcars)[1] <- "dog"
+$ rownames(mtcars)
+$ write.csv(x, "names.csv")
+$ round(u)
+$ round(u, 2), round(u, digits = 2)
+$ floor, ceiling, excel_round
+$ plot(v1, v2, xlim = c(0, 10), ylim = c(0, 10),
+    xlab = "label", ylab = "label", main = "main")
+$ lines(xc, yc)
+$ lines(xc, yc, col = "red")
+$ lines(xc, yc, col = "red", lwd = 2)
+$ points(xc, yc, pch = 17, col = "blue")
+$ source(script)
+$ read.csv("...")$elgibles
+$ z[(z$rum == 3),]
+$ z[(z$rum %in% 3),] # handles NA
+$ z[!(z$run %in% 3),]
+$ transform(df, col = ...)
+$ df[test, newcol] <- something
+$ ls(), rm(mtcars)
+ways to address data frames
+[,]
+[,c("one", "two")]
+[,c(1, 10, 11)]
+[,c(-1, -2)]
+[,!(names(mtcars) %in% DropCols]
+$ rownames(df)
+$ nchar(v)
+$ for (in in 1:nrow(mtcars))
+$ merge(p, q, all = T)
+              all = F
+              all.x = T
+              all.y = T
+$ boxplot(mtcars$mpg)
+$ boxplot(mpg ~ cyl, data = mtcars)
+$ hist(mtcars$mpg)
+$ barplot(mtcars$mpg)
+$ pie(x, c(0, 5, 10, 15), c("lab1", "lab2", ...))
+$ sample(v, 5)
+$ sample(v, 5, replace = T)
+$ sample(v, 5, prob = c(.8, .1, .1))
+$ subset(mtcars, hp > 100)
+$ mtcars[mtcars$hp > 100,]
+$ subset(v, hp > 100, select = keepcols)
+cannot assign into subset
+$ grep("hi", CharVector)
+$ grep1("hi", CharVector)
+$ sub(pattern = "hi", replacement = "hello", x)
+$ gsub
+$ str_trim(x)
+$ str_trim(x, side = "left")
