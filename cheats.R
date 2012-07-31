@@ -223,7 +223,7 @@ birthday <- function(n, r) {
 # plot the ecdf of 1000 random samples from a normal distribution
 > plot(ecdf(rnorm(1000)))
 
-> from two minute tutorials
+> # From two minute tutorials
 > # Change the number of digits displayed:
 > option(digits = 22)
 
