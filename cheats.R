@@ -224,3 +224,458 @@ birthday <- function(n, r) {
 > plot(ecdf(rnorm(1000)))
 
 > from two minute tutorials
+> # Change the number of digits displayed:
+> option(digits = 22)
+
+> # Make a vector:
+> x <- c(1, 2, 3)
+
+> # A literal sequence:
+> 10:20
+
+> # Some functions that work on vectors, plus addressing:
+> length(v)
+> class(v)
+> is.numeric(x)
+> v[2]
+
+> # Taking a slice:
+> y <- v[4:8]
+
+> # Constructing a data frame from scratch:
+> df <- data.frame(
++    col1 = c("x", "y", "z"),
++    col2 = c(1, 2, 3),
++    row.names = c("bob", "james", "harry"))
+
+> # Addressing a data frame, only the second row, all cols:
+> df[2,]
+> # Addressing a data frame, only the first two rows, all cols:
+> df[1:2,]
+> # A way to loop on a data frame:
+> for (i in 1:nrow(mtcars)) {
++   print(mtcars[i,])
++ }
+
+> # Installing and using a package:
+> install.packages("name")
+> library(name)
+
+> # Invoking the help system:
+> ?func
+
+> # Sequence function for more complex sequences:
+> seq(from = 0, to = 10, by = 2)
+
+> # Reading a csv file:
+> df <- read.csv("...")
+> # More advanced:
+> df <- read.csv("...", header=F, sep="\t")
+
+> # Getting and setting the working directory:
+> getwd()
+> setwd("...")
+
+> # Looking at part of a data frame:
+> head(df)
+> tail(df)
+> head(df, n=20)
+
+> # Some common literals, operators, functions:
+> T, F
+> !
+> if, else
+> ifelse(x, "true", "false")
+> for (i in 1:3)
+> 10 %% 3
+<> while, break, next, repeat{}
+
+> # Some common string manipulation functions:
+> gsub, sub
+> nchar
+> grep("hi", CharVector)
+> grep1("hi", CharVector)
+> sub(pattern = "hi", replacement = "hello", x)
+> gsub
+> str_trim(x)
+> str_trim(x, side = "left")
+
+> # Conversion routines:
+> as.character(x)
+> as.numeric(x)
+> as.logical(x)
+
+> # Loading a built in data frame:
+> data(mtcars)
+> # All the rows, only the "cyl" column:
+> mtcars[,"cyl"]
+> # Only the rows where cylinders is 6, all the columns:
+> mtcars[(mtcars[,"cyl"] == 6),]
+> # Assingnment into a new data frame column with conditional:
+> mtcars[,"newcol"] <- ifelse (conditional, true, false)
+
+> # Make a new vector concatenating first and second with separator:
+> paste(c("dog", "cat", "man"), c("foo", "bar", "baz"), sep = "-")
+[1] "dog-foo" "cat-bar" "man-baz"
+> # If one is scalar and other is vector, re-uses the scalar:
+> paste("hi", v)
+> # Merge the individual results all togther with string separator:
+> paste("hi", v, collapse = "")
+> paste("hi", "there", sep = ":")
+
+> # Some basic descriptive stats functions:
+> mean, median, mode, quantile
+> summary
+> quantile(v, prob = .9)
+> quantile(v, type = 3)
+> sum
+
+> # Can do a cross product between two vectors with outer:
+> v1 <- c(1, 2, 3)
+> v2 <- c(4, 5, 6)
+> outer(v1, v2, FUN=paste)
+> # and flatten to a vector:
+> as.character(outer(v1, v2, FUN=paste))
+
+> # Handling errors without blowing up the script:
+> try(x, silent = T)
+> try({...}, silent = T)
+> e <- try(...
+> # Branching on the error:
+> if (class(e) == "try-error")
+
+> # Used to create tabular counts:
+> table(mtcars$cyl)
+> # Cross tabulation of two dimensions:
+> table(mtcars$cyl, mtcars$gear)
+> # Flattened versions for higher dimensions:
+> ftable(mtcars[,c("cyl", "gear", "carb")])
+
+> # Open up a spread sheet like UI to edit a data frame:
+> fix(mtcars)
+
+> # transform is another way to transform / add to a
+> # data frame. Of course the regular
+> # df[] <- addressing can be used to similar effect
+> # and may be more flexible.
+> # Here add a new column to the data frame:
+> mtcars <- transform(mtcars, newcol = 2 * oldcol)
+
+> # With data frame addressing, we can basically do
+> # something like a transform but to a subset of
+> # some columns:
+> df[test, newcol] <- something
+
+> # Sorting a vector:
+> sort(u), sort(u, decreasing = T)
+
+> # Sorting a data frame, here the order is set to the order
+> # coming from a sort on the wt column:
+> mtcars[order(mtcars$wt),]
+
+> # A sqldf package exists that will let you work with data
+> # frames using familiar SQL:
+> x <- sqldf("select ...")
+
+> # Merge two data frames together by a column:
+> merge(df1, df2, by.x = "column1", by.y = "column2")
+> # If the columns have the same name only need to specify once:
+> merge(df1, df2, by = "column")
+> # And of course you can get fancy here, simulating left
+> # and right joins and stuff with the proper parameters:
+> merge(p, q, all = T)
+> # Also, all = F, all.x = T, all.y = T
+
+> # If two tables have the same number of rows, can put them
+> # together "horizontally" with:
+> cbind(df1, df2)
+> # If the tables have the same columns then rbind will
+> # "stack" them into one data frame:
+> rbind(df1, df2)
+
+> # tapply produces a vector output from data frame data,
+> # here we get the mean of mpg grouped by gear:
+> tapply(mtcars$mpg, mtcars$gear, mean)
+> # and here we get the 80th quantile of horse power
+> # grouped by cylinder:
+> tapply(mtcars$hp, mtcars$cyl, quantile, prob = .8)
+
+> # Aggregation of a data frame, here grouped by the number
+> # of gears, and producing the mean of the miles per
+> # gallon in a data frame output:
+> aggregate(mtcars$mpg, by = list(mtcars$gear), mean)
+
+> # Many of the functions take a na.rm parameter which can
+> # be used to instruct the function to remove values when
+> # the value is NA:
+> na.rm = T
+
+> # The is.na function can be used to operate on whether
+> # or not the value is NA. Likewise the in operator can
+> # be used to work around NA problems:
+> is.na(x)
+> z[is.na(z$rc), "rc"] <- 0
+> %in%, ?"%in%"
+
+> # Show the column names, change a column name:
+> names(mtcars)
+> names(mtcars)[1] <- "dog"
+> # Show the row names:
+> rownames(mtcars)
+
+> # Writing out your data is similar to using the
+> # read.csv function.
+> # Here we write data frame x out in csv format
+> # into a file called names.csv:
+> write.csv(x, "names.csv")
+
+> # Some ways to round:
+> round(u)
+> round(u, 2), round(u, digits = 2)
+> floor, ceiling, excel_round
+
+> # Scatter plot, scatter plot, xcoords in v1,
+> # ycoords in v2:
+> plot(v1, v2, xlim = c(0, 10), ylim = c(0, 10),
++    xlab = "label", ylab = "label", main = "main")
+> # Now add a line:
+> lines(xc, yc)
+> # How about a red line:
+> lines(xc, yc, col = "red")
+> # And now with a width of 2:
+> lines(xc, yc, col = "red", lwd = 2)
+> # And finally throw on some points:
+> points(xc, yc, pch = 17, col = "blue")
+
+> # Some addressing of data frame examples.
+> # Include rows where rum == 3, all columns:
+> z[(z$rum == 3),]
+> # Include rows where rum == 3, all columns, handles
+> # NA probably the way you want it:
+> z[(z$rum %in% 3),] # handles NA
+> # And similar to the last with a negation:
+> z[!(z$run %in% 3),]
+
+> # Listing the objecs in memory and remove them:
+> ls(), rm(mtcars)
+
+> # Some ways to address data frames:
+[,]
+[,c("one", "two")]
+[,c(1, 10, 11)]
+[,c(-1, -2)]
+[,!(names(mtcars) %in% DropCols]
+
+> # Draw a boxplot of the miles per gallon:
+> boxplot(mtcars$mpg)
+> # Draw a series of miles per gallon box plots grouped
+> # into cylinder groups:
+> boxplot(mpg ~ cyl, data = mtcars)
+> # Or same thing:
+> boxplot(mtcars$mpg ~ mtcars$cyl)
+
+> # How to make a histogram:
+> hist(mtcars$mpg)
+
+> # How to make a bar chart:
+> barplot(mtcars$mpg)
+
+> # How to make a pie chart:
+> pie(x, c(0, 5, 10, 15), c("lab1", "lab2", ...))
+
+> # Sample 5 elements from the vector:
+> sample(v, 5)
+> # and now with replacement:
+> sample(v, 5, replace = T)
+> # and now with the given probablity of choosing each
+> # element:
+> sample(v, 5, prob = c(.8, .1, .1))
+
+> # subset is another way to slice and dice a data frame,
+> # but data frame addressing is still probably the way
+> # to go as you cannot assign into a subset.
+> subset(mtcars, hp > 100)
+> subset(v, hp > 100, select = keepcols)
+> mtcars[mtcars$hp > 100,keepcols]
+
+> # Generate 1 random number between 0 and 1, that is
+> # a random from a UNIForm distribution:
+> runif(n = 1, min = 0, max = 1)
+
+> # How to use round and runif to get the same thing as
+> # a single sample:
+> sample(0:100, size = 1)
+> round(runif(n = 1, min = 0, max = 100))
+
+> # Generate a random number from a statistical distribution.
+> # First generate 1000 random numbers from the uniform
+> # distribution between 0 and 10:
+> x <- runif(n = 1000, min = 0, max = 10)
+> hist(x, breaks = 10)
+> # Now generate 1000 random numbers from the standard
+> # normal distribution that is mean = 0, sd = 1:
+> y <- rnorm(n = 1000)
+> hist(y)
+
+> # Setting the seed controls random number generation.
+> # That will, for example, effect random uniform
+> # distribution generation.
+> set.seed(1)
+> runif(5)
+
+> # Fancier plot:
+> plot(1:30, 2^(1:30), xlab = "generations back",
++     ylab = "number of ancestors",
++     main = "number of ancestors in each generation")
+> # If you do a plot with axes = F then you get no axes but then
+> # you can control them more granularly such as doing:
+> axes( side = 3, at = c(2, 4, 8), labels = c("two", "FOUR", "8"))
+> # Similarly can add text at a point:
+> text(9, 7, "(nine,seven)")
+> # Can also do that with multiple coordinates in one go:
+> text(x.coord, y.coord, c("one", "two", "three"), pos = 1)
+
+> # Instead of <- can use assign to dynamically make variable
+> # names:
+> assign("varname", 10)
+> # Then can do things in loop that makes variables for example
+> # by pasting together a variable name:
+> varname <- paste("pos", i, sep=".")
+> assign(varname, computation)
+> get("name")
+
+> # Examine the history of commands, save history:
+> history(max.show = 50)
+> history(max.show = Inf)
+> savehistory(file = "/home/dburger/script.R")
+
+> # Working with lists, heterogeneous.
+> y <- list(10:12, c("1", "2", "3"), mtcars)
+> y[[1]]
+> y[[2]][3]
+> y[[3]]
+
+> # Normalizing some data, first the data:
+> x <- c(4, 5, 6, 12, 22, -1)
+> mean(x)
+> var(x)
+> sd(x)
+> # Now make a normalized version of the vector:
+> y <- (x - mean(x)) / sd(x)
+> mean(y)
+> var(y)
+> sd(y)
+
+> # Source a script, and source with echo on:
+> source(script)
+> source(script, echo = T)
+
+> # Grab a time object representing the current time:
+> now <- Sys.time()
+
+> # Start with an empty data frame and add to it:
+> x <- data.frame()
+> # How to add to it?
+
+> # Make a matrix:
+> x <- matrix(NA, nrow = 3, ncol = 3)
+
+> # ifelse of course works vectorized:
+> x <- c(TRUE, FALSE, TRUE)
+> y <- ifelse(c >= 2, "yes", no")
+
+> # Calculating correlation coefficients:
+> data(mtcars)
+> cor(mtcars$hp, mtcars$mpg)
+> cor(mtcars$hp, mtcars$mpg, method = "pearson")
+> cor(mtcars$hp, mtcars$mpg, method = "kendall")
+> cor(mtcars$hp, mtcars$mpg, method = "spearman")
+
+> # Create a linear regression model of mpg against
+> # horse power plus weight for the mtcars data.
+> x <- lm(mpg ~ hp + wt, data = mtcars)
+> # Or do it with explict column vectors:
+> x <- lm( mtcars$mpg, mtcars$hp + mtcars$wt)
+> # Of course could just do mpg versus hp:
+> x <- lm(mpg ~ hp, data = mtcars)
+> # Look at a summary of the model:
+> summary(x)
+> # And the residuals for each data point, here that
+> # would be how far a particular cars mpg was off
+> # from what is predicted by the model:
+> residuals(x)
+> # The x$coefficients contains the slope, intercept.
+> # The x$sigma contains the root mean squared error,
+> # which gives you the expected offset from the
+> # regression line.
+> # To look at this data with the regression line:
+> plot(mtcars$mpg, mtcars$hp)
+> abline(x)
+> # boxplot the residuals to see how far each is off:
+> boxplot(residuals(x))
+> # Scatter plot each cars mpg against its residual:
+> plot(mtars$mpg, residuals(x))
+> Cycle through several different plots:
+> plot(x)
+> # Of course R makes it easy to do different linear
+> # models over different ranges of the data, for example:
+> a <- lm(received[requested > 10]~requested[requested > 10],
++     data=employees)
+> b <- lm(received[requested <= 10]~requested[requested <= 10],
++     data=employees)
+
+> # Generate random binomial distributions, here coin flip,
+> # 1000 flips with 50% chance heads
+> x < rbinom(n = 1000, size = 1, prob = 1/2)
+
+> # Saving a plot, can do bmp, jpeg, png, tiff, svg,
+> # and probably others:
+> png("output.png")
+> plot(...)
+> dev.off()
+
+> # split, can take regular expressions for split:
+> parts <- strsplit("hello world", split = " ")
+
+> # Setting options, reading options, dumping options:
+> options(digits = 10)
+> getOption("digits")
+> options()
+
+> # Actual date class that can do date math:
+> birthday <- strptime("02.06.1969", format = "%m.%d.%Y")
+> # 10000 day on earth
+> birthday + 10000 * 60 * 60 * 24
+
+> # When lots of data points in a scatter plot are going
+> # to overlap the jitter function will make them offset
+> # a bit.
+> # Plots Sales versus Articles from dataframe dispatch
+> plot(Sales~jitter(Articles), data=dispatch)
+
+> # Very nice visualization of plots grouped by a value.
+> # Makes a hits versus comments plot by author:
+> libray(lattice)
+> xyplot(hits~comments|name, data=articles)
+
+> # Cleaning data, looks like you can just reassign right
+> # back to the column.
+> df$job <- sub("scrubber", "polisher", df$job)
+> # or possibly
+> df[,"job"] <- sub("scrubber", "polisher", df$job)
+> # or add a new column
+> df[,"new_column"] <- sub("scrubber", "polisher", df$job)
+
+> # Returns a subset of the columns of a data frame, here
+> # we assign it back to the same variable.
+> # All the rows, but only the name and age columns:
+> df <- df[,c("name", "age")]
+
+> # Removing a single column can also be done with a
+> # NULL assignment:
+> df$column_name <- NULL
+
+> # Change a data frame's column names:
+> names(df) <- c("your", "new", "names")
+> # Or change one at a time:
+> names(df)[2] <- "whatever"
