@@ -582,7 +582,7 @@ birthday <- function(n, r) {
 
 > # ifelse of course works vectorized:
 > x <- c(TRUE, FALSE, TRUE)
-> y <- ifelse(c >= 2, "yes", no")
+> y <- ifelse(c >= 2, "yes", "no")
 
 > # Calculating correlation coefficients:
 > data(mtcars)
