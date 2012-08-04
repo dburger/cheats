@@ -457,7 +457,7 @@ birthday <- function(n, r) {
 > z[!(z$run %in% 3),]
 
 > # Listing the objecs in memory and remove them:
-> ls(), rm(mtcars)
+> ls(), objects(), rm(mtcars)
 
 > # Some ways to address data frames:
 [,]
