@@ -229,6 +229,8 @@ birthday <- function(n, r) {
 
 > # Make a vector:
 > x <- c(1, 2, 3)
+> # Powerful vector element selection:
+> y <- x[x > mean(x)]
 
 > # A literal sequence:
 > 10:20
