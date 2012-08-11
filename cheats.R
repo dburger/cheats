@@ -263,6 +263,16 @@ birthday <- function(n, r) {
 
 > # Invoking the help system:
 > ?func
+> # searches for text in the documentation
+> ??text
+> help.search("pattern")
+> start a local help browser to full documentation
+> help.start()
+> # specific help
+> help(functionname)
+> args(functionname)
+> example(functionname)
+> search the help
 
 > # Sequence function for more complex sequences:
 > seq(from = 0, to = 10, by = 2)
