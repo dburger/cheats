@@ -689,3 +689,7 @@ birthday <- function(n, r) {
 > names(df) <- c("your", "new", "names")
 > # Or change one at a time:
 > names(df)[2] <- "whatever"
+
+> # some output functions
+> print(x)
+> cat("This and", x, "and also that")
