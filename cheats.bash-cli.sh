@@ -229,3 +229,6 @@ while true; do ls; echo "sleeping"; sleep 5; done
 
 # launch screen changing activation key to C-\ instead of C-a
 screen -e ^\\\\\\
+
+# create a navigable master document from several markdown files
+pandoc -st html5 --toc --section-divs -o /home/dburger/www/out.html *markdown
