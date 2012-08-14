@@ -698,6 +698,12 @@ birthday <- function(n, r) {
 > # some output functions
 > print(x)
 > cat("This and", x, "and also that")
+> # and cat can right to a file
+> cat("This and", x, file="filename")
+> # or to a file handle
+> f = file("filename", "w")
+> cat("This and", x, file=f)
+> close(f)
 
 > # quick trick to get the percent of a vector that
 > # matches a criteria, the boolean comparison makes
