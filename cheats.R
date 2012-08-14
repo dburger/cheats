@@ -710,3 +710,10 @@ birthday <- function(n, r) {
 > # a TRUE / FALSE vector and then the mean function
 > # changes that to TRUE = 1, FALSE = 0
 > mean(x == "bob")
+
+> # POSIXct and POSIXlt are a couple of date types, they have
+> # the regular old as converters
+> as.POSIXct("string")
+> as.POSIXlt("string")
+> # POSIXct is seconds since the epoch
+> # POSIXlt is broken out year, month, ..., second
