@@ -717,3 +717,8 @@ birthday <- function(n, r) {
 > as.POSIXlt("string")
 > # POSIXct is seconds since the epoch
 > # POSIXlt is broken out year, month, ..., second
+
+> Good old recycling rules and diff can make for some consise
+> distribution range calculations. For example, what is the
+> likelihood from 3 to 7 successes out of 10
+> diff(pbinom(c(3, 7), 10, prob=0.5)
