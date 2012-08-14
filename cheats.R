@@ -226,6 +226,9 @@ birthday <- function(n, r) {
 > # From two minute tutorials
 > # Change the number of digits displayed:
 > option(digits = 22)
+> # but then you probably don't want to change that globally, many
+> # functions allow yout to specify the digits, especially this one
+> print(x, digits=12)
 
 > # Make a vector:
 > x <- c(1, 2, 3)
@@ -695,3 +698,9 @@ birthday <- function(n, r) {
 > # some output functions
 > print(x)
 > cat("This and", x, "and also that")
+
+> # quick trick to get the percent of a vector that
+> # matches a criteria, the boolean comparison makes
+> # a TRUE / FALSE vector and then the mean function
+> # changes that to TRUE = 1, FALSE = 0
+> mean(x == "bob")
