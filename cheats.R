@@ -722,3 +722,21 @@ birthday <- function(n, r) {
 > distribution range calculations. For example, what is the
 > likelihood from 3 to 7 successes out of 10
 > diff(pbinom(c(3, 7), 10, prob=0.5)
+
+> # POS:154 something is off here
+> observed <- c(59, 316, 596, 633, 320, 76)
+> expected <- c(62.5, 312.5, 625, 625, 312.5, 62.5)
+> # calculated X-squared matches
+> sum((expected - observed)^2 / expected)
+[1] 4.7792
+> # but apparently that is not how you invoked it with chisq.test
+> chisq.test(expected, observed)
+
+  Pearson's Chi-squared test
+
+data:  expected and observed 
+X-squared = 12, df = 10, p-value = 0.2851
+
+Warning message:
+In chisq.test(expected, observed) :
+  Chi-squared approximation may be incorrect
