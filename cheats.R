@@ -740,3 +740,15 @@ X-squared = 12, df = 10, p-value = 0.2851
 Warning message:
 In chisq.test(expected, observed) :
   Chi-squared approximation may be incorrect
+
+> # The read functions currently are unable to read over SSL,
+> # however the download.file function can be used. Here is
+> # an example function that can hide the multiple steps to
+> # using download.file to get data in a data frame
+> my.read <- function(url) {
++   f <- tempfile()
++   download.file(url, destfile=f, method="wget")
++   df <- read.csv(f)
++   unlink(f)
++   df
++ }
