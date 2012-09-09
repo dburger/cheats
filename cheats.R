@@ -744,7 +744,7 @@ In chisq.test(expected, observed) :
 > # The read functions currently are unable to read over SSL,
 > # however the download.file function can be used. Here is
 > # an example function that can hide the multiple steps to
-> # using download.file to get data in a data frame
+> # using download.file to get data in a data frame:
 > my.read <- function(url) {
 +   f <- tempfile()
 +   download.file(url, destfile=f, method="wget")
@@ -752,3 +752,9 @@ In chisq.test(expected, observed) :
 +   unlink(f)
 +   df
 + }
+
+> # The hist function makes nice histograms but seems to require
+> # the values to be a vector of individual values. If your data
+> # is from a data frame and say you have df$size and df$count
+> # you can use rep to explode the out into a vector, for example:
+> hist(rep(df$size, df$count), breaks=0:12)
