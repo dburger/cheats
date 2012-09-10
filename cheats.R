@@ -758,3 +758,10 @@ In chisq.test(expected, observed) :
 > # is from a data frame and say you have df$size and df$count
 > # you can use rep to explode the out into a vector, for example:
 > hist(rep(df$size, df$count), breaks=0:12)
+
+> # cut allows you to break up convert values into the range they
+> # occupy as a factor. Something you might do with this is then
+> # make a table of the count of values within each factor:
+> table(cut(mtcars$mpg, breaks=seq(10.0, 35.0, by=5.0)))
+(10,15] (15,20] (20,25] (25,30] (30,35] 
+      6      12       8       2       4 
