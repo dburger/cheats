@@ -379,7 +379,7 @@ birthday <- function(n, r) {
 > # With data frame addressing, we can basically do
 > # something like a transform but to a subset of
 > # some columns:
-> df[test, newcol] <- something
+> df[test, "newcol"] <- something
 
 > # Sorting a vector:
 > sort(u), sort(u, decreasing = T)
