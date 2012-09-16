@@ -765,3 +765,58 @@ In chisq.test(expected, observed) :
 > table(cut(mtcars$mpg, breaks=seq(10.0, 35.0, by=5.0)))
 (10,15] (15,20] (20,25] (25,30] (30,35] 
       6      12       8       2       4 
+
+> # (some of the formula's here are in Bulmer's Ch. 4)
+> # Computing mean, variance, and standard deviation from data
+> # given with frequency counts. Say you have this:
+> df <- data.frame(count=c(3, 4, 5), weight=c(9,10,11))
+> df
+  count weight
+1     3      9
+2     4     10
+3     5     11
+> # Of course you can just use rep to let R operate on the full
+> # vectors:
+> mean(rep(df$weight, df$count))
+[1] 10.16667
+> var(rep(df$weight, df$count))
+[1] 0.6969697
+> sd(rep(df$weight, df$count))
+[1] 0.8348471
+> # Getting the mean without using rep is easy:
+> sum(df$count * df$weight) / sum(df$count)
+[1] 10.16667
+> # Calculating the sum of squares will allow you to easily
+> # calculate variance and standard devation, from the counts
+> # this can be done as follows, explicit way:
+> sum(df$count * (df$size - (sum(df$count * df$size) / sum(df$count)))^2)
+[1] 7.666667
+> # or the shortcut (on paper anyway) formula way:
+> sum(df$count * df$weight^2) - sum(df$count) * (sum(df$weight * df$count) / sum(df$count))^2
+[1] 7.666667
+> # now divide by n or n-1 to get sample or population variance.
+
+> # (some of the formula's here are in Bulmer's Ch. 4)
+> # Computing mean, variance, and standard deviation from data
+> # given with frequency percentages. Take the data frame from
+> # from the last section and do this:
+> df[,"percent"] <- df$count / sum(df$count)
+> df
+  count weight   percent
+1     3      9 0.2500000
+2     4     10 0.3333333
+3     5     11 0.4166667
+> # Now we will use frequency percentages to calculate mean,
+> # variance, and standard deviation. First the mean:
+> sum(df$weight * df$percent)
+[1] 10.16667
+> # and the population variance (see the mean in there):
+> sum((df$weight - sum(df$weight * df$percent))^2 * df$percent)
+[1] 0.6388889
+> # thus the population standard deviation need only take the
+> # square root:
+> sqrt(sum((df$weight - sum(df$weight * df$percent))^2 * df$percent))
+[1] 0.7993053
+> # And of course these can be adjusted to sample instead of
+> # population computations with the appropriate adjustment:
+> (previous result) * sum(df$count) / (sum(df$count) - 1)
