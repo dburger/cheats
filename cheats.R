@@ -136,6 +136,7 @@ birthday <- function(n, r) {
 # some of the common distribution functions are
 # (binom) binomial distribution
 # (pois) poisson distribution
+# (exp) exponential distribution
 # (norm) normal distribution
 
 # for example the binomial distribution name is binom calculate the probability
