@@ -226,6 +226,8 @@ find . -path ./review -prune -o -name "*java"
 
 # example one line while
 while true; do ls; echo "sleeping"; sleep 5; done
+# or similar
+while :; do ls; echo "sleeping"; sleep 5; done
 
 # launch screen changing activation key to C-\ instead of C-a
 screen -e ^\\\\\\
