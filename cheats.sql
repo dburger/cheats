@@ -581,3 +581,6 @@ LOAD DATA INFILE '/export/hda3/mysql/dump.csv'
 INTO TABLE Foozer
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n';
+
+# Get row counts with non-expensive, possibly slightly stale, query:
+SELECT table_rows FROM information_schema.tables WHERE table_name = 'table';
