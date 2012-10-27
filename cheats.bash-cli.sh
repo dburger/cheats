@@ -234,3 +234,9 @@ screen -e ^\\\\\\
 
 # create a navigable master document from several markdown files
 pandoc -st html5 --toc --section-divs -o /home/dburger/www/out.html *markdown
+
+# xargs for parallel execution, 1 argument to each invocation, 15 threads
+cat input | xargs -n 1 -P 15 doit.sh
+
+# xargs as non tail argument
+cat input | xargs -I '{}' cmd --foo='{}' --bar=baz
