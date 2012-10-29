@@ -144,7 +144,7 @@ mogrify -resize 1024x1024 -quality 75 *JPG
 openssl req -new -x509 -days 30 \
   -keyout /etc/apache2/conf/ssl.key/server.key \
   -out /etc/apache2/conf/ssl.crt/server.crt \
-  -subj '/CN=Test-Only Certificate
+  -subj '/CN=Test-Only Certificate'
 
 # notifications on the gnome desktop
 notify-send -i info -t 3000 "don't do that"
