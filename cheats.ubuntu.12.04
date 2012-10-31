@@ -1,0 +1,69 @@
+starting with goobuntu 12.04
+
+1. git bin/ and dotfiles/ in your home directory
+
+also in dotfiles you have submodules, so do
+> git submodule init
+> git submodule update
+
+2. set up your symlinks to dotfiles
+
+don't symlink bashrc.sh, source it from the default
+by adding this to the bottom of the file
+# source in my specific bashrc additions / changes
+. ~/dotfiles/bashrc.sh
+
+doesn't look like bash_profile is linked anywhere
+
+> # configuration of awesome
+> ln -s ~/dotfiles/rc.lua ~/.config/awesome/rc.lua
+
+> # make the caps lock a control
+> ln ~/dotfiles/Xmodmap ~/.Xmodmap
+
+> # emacs
+> ln -s dotfiles/emacs.el ~/.emacs
+
+3. to set up awesome
+first install
+> sudo apt-get install awesome suckless-tools
+> # tell gnome-settings-daemon not to draw a desktop or desktop icons
+> gsettings set org.gnome.desktop.background show-desktop-icons false
+> # tell gnome-settings-daemon not to draw a background
+> gsettings set org.gnome.settings-daemon.plugins.background active false
+
+next set up lightdm to show Awesome+ in list of choices, set up files
+/usr/share/xsessions/awesome-plus.desktop
+[Desktop Entry]
+Name=awesome+
+Comment=Awesome+
+TryExec=/usr/bin/gnome-session
+Exec=gnome-session --session=awesome-plus
+Type=XSession
+
+/usr/share/gnome-session/sessions/awesome-plus.session
+[GNOME Session]
+Name=Awesome+ Session
+RequiredComponents=gnome-settings-daemon;
+RequiredProviders=windowmanager;
+DefaultProvider-windowmanager=awesome
+DefaultProvider-notifications=notification-osd
+DesktopName=GNOME
+
+/usr/share/applications/awesome.desktop:
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Awesome
+Comment=Awesome WM
+TryExec=awesome
+Exec=awesome
+
+Now lightdm should include Awesome+. Log out and log in using Awesome+.
+
+4. some settings you will want
+gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
+gsettings set org.gnome.desktop.interface ubuntu-overlay-scrollbars false
+
+5. programs you will want
+sudo apt-get install r-base
