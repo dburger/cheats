@@ -67,3 +67,4 @@ gsettings set org.gnome.desktop.interface ubuntu-overlay-scrollbars false
 
 5. programs you will want
 sudo apt-get install r-base
+sudo apt-get install irssi
