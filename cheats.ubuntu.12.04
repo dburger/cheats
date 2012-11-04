@@ -64,6 +64,7 @@ Now lightdm should include Awesome+. Log out and log in using Awesome+.
 4. some settings you will want
 gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
 gsettings set org.gnome.desktop.interface ubuntu-overlay-scrollbars false
+gconftool-2 --set /apps/metacity/general/button_layout --type string "menu:minimize,maximize,close"
 
 5. programs you will want
 sudo apt-get install r-base
