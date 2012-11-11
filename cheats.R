@@ -432,6 +432,12 @@ birthday <- function(n, r) {
 > # of gears, and producing the mean of the miles per
 > # gallon in a data frame output:
 > aggregate(mtcars$mpg, by = list(mtcars$gear), mean)
+> # alternative tilda syntax:
+> aggregate(mpg ~ geat, mtcars, mean)
+> # Example with multiple column grouping:
+> aggregate(list(Count=aggs$Count), by=list(Service=aggs$Service, SnippetHash=aggs$SnippetHash), sum)
+> # and in the alternative, shorter syntax:
+> aggregate(Count ~ Service * SnippetHash, aggs, sum)
 
 > # Many of the functions take a na.rm parameter which can
 > # be used to instruct the function to remove values when
