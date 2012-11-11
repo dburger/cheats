@@ -320,6 +320,7 @@ birthday <- function(n, r) {
 > as.character(x)
 > as.numeric(x)
 > as.logical(x)
+> as.Date(x, "input format")
 
 > # Loading a built in data frame:
 > data(mtcars)
@@ -329,6 +330,13 @@ birthday <- function(n, r) {
 > mtcars[(mtcars[,"cyl"] == 6),]
 > # Assingnment into a new data frame column with conditional:
 > mtcars[,"newcol"] <- ifelse (conditional, true, false)
+> # Assignment into a new data frame column simplest way
+> df$sum <- df$x1 + df$x2
+
+> # recoding a value that is invalid
+> df$age[df$age == 99] <- NA
+> # adding a category from existing column values
+> df$agecat[df$age > 60] <- "elderly"
 
 > # Make a new vector concatenating first and second with separator:
 > paste(c("dog", "cat", "man"), c("foo", "bar", "baz"), sep = "-")
@@ -388,6 +396,10 @@ birthday <- function(n, r) {
 > # Sorting a data frame, here the order is set to the order
 > # coming from a sort on the wt column:
 > mtcars[order(mtcars$wt),]
+> # reversing:
+> mtcars[order(mtcars$wt, decreasing=TRUE),]
+> # or reversing per ordering field using -:
+> mtcars[order(-mtcars$wt, -mtcars$cyl),]
 
 > # A sqldf package exists that will let you work with data
 > # frames using familiar SQL:
@@ -424,13 +436,27 @@ birthday <- function(n, r) {
 > # Many of the functions take a na.rm parameter which can
 > # be used to instruct the function to remove values when
 > # the value is NA:
-> na.rm = T
+> na.rm=TRUE
+> # For example:
+> y <- sum(x, na.rm=TRUE)
+
+> # Scale values to produce a vector with a mean of 0
+> # and a standard deviation of one:
+> y <- scale(x)
+> # Scale values to produce a vector with a mean of
+> # M and and standard deviation of SD
+> y <- scale(x) * SD + M
+
+> # Also can ignore rows that have any NA values:
+> df <- na.omit(df)
 
 > # The is.na function can be used to operate on whether
 > # or not the value is NA. Likewise the in operator can
 > # be used to work around NA problems:
 > is.na(x)
 > z[is.na(z$rc), "rc"] <- 0
+> # or maybe
+> z$rc[is.na(z$rc)] <- 0
 > %in%, ?"%in%"
 
 > # Show the column names, change a column name:
@@ -588,6 +614,13 @@ birthday <- function(n, r) {
 
 > # Grab a time object representing the current time:
 > now <- Sys.time()
+> now <- Sys.Date()
+
+> # Outputting formatted date values:
+> format(x, format="a date time format string")
+
+> # Some data arithmetic:
+> difftime(x, y, units="weeks")
 
 > # Start with an empty data frame and add to it:
 > x <- data.frame()
