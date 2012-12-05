@@ -471,7 +471,7 @@ WHERE
   t.TaskType = 'Analysis' AND
   t.StartEvent NOT IN ('CANARY', 'NONE', 'PUSH') AND
   t.StartEvent NOT LIKE '% %' AND
-  ti.TaskInstanceId % 10 = 0;
+  t.TaskId % 10 = 0;
 
 
 -- example multi-step mysql function
