@@ -1,5 +1,45 @@
 # examples, examples, and more examples?
 
+# make it so that output redirects won't clobber files
+set -o noclobber
+# and of course turn off
+set +o noclobber
+# even when noclobber is on you can override with >|
+echo "whatever" >|filename.txt
+
+# suppress newline with echo
+echo -n "whatever"
+# do shell escapse with echo
+echo -e "hello\nworld"
+
+# redirect stderr to same place as stdout, classic
+echo "whatever" >file.txt 2>&1
+# using shortcut
+echo "whatever" >&file.txt
+# or flipped
+echo "whatever" &>file.txt
+
+# capture all output without using a subshell, spaces
+# and semicolons important!
+{ echo "yeah"; cd foo; ls -al; } > file.txt
+
+# this can also allow you to group a couple of statements,
+# spaces and semicolons important!
+[ $result = 1 ] || { echo "didn't work"; exit 69; }
+
+# type and which will show you where a command is coming from,
+# type includes aliases and builtins while which does not, with
+# the -a switch it shows all instead of stopping at first found
+type -a cd
+which -a cat
+
+# apropos returns results from man pages
+apropos delete
+
+# different kinds of file information
+file name.txt
+stat name.txt
+
 # show defualt file permissions, bit on means does not get
 umask
 0027
@@ -234,6 +274,9 @@ screen -e ^\\\\\\
 
 # create a navigable master document from several markdown files
 pandoc -st html5 --toc --section-divs -o /home/dburger/www/out.html *markdown
+
+# tail, but instead of how many tail lines to show, what line to start at
+tail +100 file.txt
 
 # xargs for parallel execution, 1 argument to each invocation, 15 threads
 cat input | xargs -n 1 -P 15 doit.sh

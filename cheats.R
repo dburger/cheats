@@ -210,7 +210,7 @@ birthday <- function(n, r) {
 > 1 - pnorm(2.2, 2, samplesd)
 [1] 0.02167588
 
-> # covariance and correlation coefficent
+> # Covariance and correlation coefficent:
 > x <- c(1, 2, 3, 4, 5, 6)
 > y <- 2 * x
 > y
@@ -226,6 +226,34 @@ birthday <- function(n, r) {
 [1] 24.5
 > cor(x, y)
 [1] 0.9789173
+
+> # Covariance and correlation functions can work on the columns
+> # of a data frame:
+> states <- state.x77[,1:6]
+> cov(states)
+> cor(states)
+> cor(states, method="spearman")
+> # And for non square select out the columns you want:
+> x <- states[,c("Population", "Income")]
+> y <- states[,c("Life Exp")]
+> cor(x, y)
+
+> # Testing a correlation for significance:
+> cor.test(mtcars$mpg, mtcars$cyl)
+
+> # Testing if means are equal using a t test, first limit
+> # to two levels, then test:
+> df <- mtcars[mtcars$cyl == 6 | mtcars$cyl == 8,]
+> t.test(mpg ~ cyl, data=df)
+
+> # Testing to see if samples come from same probability
+> # distribution, nonparametric:
+> df <- mtcars[mtcars$cyl == 6 | mtcars$cyl == 8,]
+> wilcox.test(mpg ~ cyl, data=df)
+
+> # Comparing more than two groups, here 4, 6, and 8
+> # cylinders:
+> kruskal.test(mpg ~ cyl, mtcars)
 
 > # compute an empirical cumulative distribution function
 > ecdf(c(1, 2, 3, 4))
@@ -380,10 +408,31 @@ birthday <- function(n, r) {
 
 > # Used to create tabular counts:
 > table(mtcars$cyl)
-> # Cross tabulation of two dimensions:
-> table(mtcars$cyl, mtcars$gear)
+> # Cross tabulation of two dimensions, first is
+> # row variable, second is column variable:
+> t <- table(mtcars$cyl, mtcars$gear)
+> # Turn a counts table into a proportions table:
+> p <- prop.table(t)
+> # And of course turn it into a percent:
+> prot.table(t) * 100
 > # Flattened versions for higher dimensions:
 > ftable(mtcars[,c("cyl", "gear", "carb")])
+
+> # Given a table t, generate marginal frequencies,
+> # by row:
+> margin.table(t, 1)
+> # by column:
+> margin.table(t, 2)
+> # Likewise generate marginal proportions,
+> # by row:
+> prop.table(t, 1)
+> # by column:
+> prop.table(t, 2)
+> # and cell proportions leave off the second argument:
+> prop.table(t)
+
+> # Add marginal sums to a table:
+> addmargins(t)
 
 > # Open up a spread sheet like UI to edit a data frame:
 > fix(mtcars)
@@ -557,6 +606,9 @@ birthday <- function(n, r) {
 > # and now with the given probablity of choosing each
 > # element:
 > sample(v, 5, prob = c(.8, .1, .1))
+> # a typical usage is to sample rows from a data frame,
+> # here sampling 5 rows from the data frame:
+> df[sample(nrow(df), 5),]
 
 > # subset is another way to slice and dice a data frame,
 > # but data frame addressing is still probably the way
@@ -698,6 +750,35 @@ birthday <- function(n, r) {
 > b <- lm(received[requested <= 10]~requested[requested <= 10],
 +     data=employees)
 
+> # Simple linear model example of built in dataset women,
+> # first create the linear model:
+> model <- lm(weight ~ height, data=women)
+> summary(model)
+> fitted(model)
+> residuals(model)
+> plot(women$height, women$weight, xlab="height", ylab="weight")
+> abline(model)
+
+> # Lowess fits can be added with two different functions,
+> # lowess() and loess(), example:
+> lines(lowess(mtcars$wt, mtcars$mpg), col="red", lwd=2, lty=19)
+
+> # The previous model looks like a pretty good fit, however,
+> # it appears to have a possible polynomial fit, here we see
+> # how this looks with a model against a second degree
+> # polynomial:
+fit <- lm(weight ~ height + I(height^2), data=women)
+> plot(women$weight, women$height)
+> lines(women$height, fitted(fit))
+> # The summary call will show you the coefficents of the
+> # equation.
+
+> # The confint function will give you the confidence intervals
+> # on your coefficients of your fitted models. It defaults to
+> # a 95% confidence interval but that can be changed with the
+> # level parameter:
+> confint(fit, level=0.99)
+
 > # Generate random binomial distributions, here coin flip,
 > # 1000 flips with 50% chance heads
 > x < rbinom(n = 1000, size = 1, prob = 1/2)
@@ -777,9 +858,9 @@ birthday <- function(n, r) {
 > # POSIXct is seconds since the epoch
 > # POSIXlt is broken out year, month, ..., second
 
-> Good old recycling rules and diff can make for some consise
-> distribution range calculations. For example, what is the
-> likelihood from 3 to 7 successes out of 10
+> # Good old recycling rules and diff can make for some consise
+> # distribution range calculations. For example, what is the
+> # likelihood from 3 to 7 successes out of 10
 > diff(pbinom(c(3, 7), 10, prob=0.5)
 
 > # POS:154 something is off here
@@ -793,12 +874,18 @@ birthday <- function(n, r) {
 
   Pearson's Chi-squared test
 
-data:  expected and observed 
+data:  expected and observed
 X-squared = 12, df = 10, p-value = 0.2851
 
 Warning message:
 In chisq.test(expected, observed) :
   Chi-squared approximation may be incorrect
+
+> # Many of the tests of independence function on the rows
+> # and columns of tables.
+> chisq.test(t)
+> fisher.test(t)
+> mantelhaen.test(t)
 
 > # The read functions currently are unable to read over SSL,
 > # however the download.file function can be used. Here is
@@ -822,8 +909,8 @@ In chisq.test(expected, observed) :
 > # occupy as a factor. Something you might do with this is then
 > # make a table of the count of values within each factor:
 > table(cut(mtcars$mpg, breaks=seq(10.0, 35.0, by=5.0)))
-(10,15] (15,20] (20,25] (25,30] (30,35] 
-      6      12       8       2       4 
+(10,15] (15,20] (20,25] (25,30] (30,35]
+      6      12       8       2       4
 
 > # (some of the formula's here are in Bulmer's Ch. 4)
 > # Computing mean, variance, and standard deviation from data
