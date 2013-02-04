@@ -1,5 +1,8 @@
 # examples, examples, and more examples?
 
+# make it so that any non-zero exit code will exit the script
+set -e
+
 # make it so that output redirects won't clobber files
 set -o noclobber
 # and of course turn off
@@ -26,6 +29,16 @@ echo "whatever" &>file.txt
 # this can also allow you to group a couple of statements,
 # spaces and semicolons important!
 [ $result = 1 ] || { echo "didn't work"; exit 69; }
+
+# $* will give all passed parameters but for handling spaces
+# you should probably use the following:
+for a in "$@"; do
+done
+
+# the count of parameters is in $#, can use in comparison
+if [ $# -lt 3 ]; then
+# or arithmetic
+if (( $# < 3 )); then
 
 # type and which will show you where a command is coming from,
 # type includes aliases and builtins while which does not, with
@@ -68,6 +81,8 @@ sed -e ':a;s/{[^}]*}//g;/{/N;/{/ba' input.ddl
 
 # output lines from line 1 to line 1000 to a file
 sed -n '1,1000 p' file > output
+# what? why not just
+head -1000
 
 # output a range of a file turning on with first regex and off with second
 sed -n '/Starting analysis mailing.*30379003/,/Completed analysis mailing.*30379003/p' gse.log-2010_11_17_19_11_46
@@ -110,6 +125,9 @@ find . -type f -mmin -5
 
 # sort a CSV file by a column, here by column 7
 sort -t',' -k 7 hotspot-list2.txt  > foo.txt
+
+# select 100 random lines of a file via a random sort
+sort -R file | head -100
 
 # set up a tunnel, local box listening on lport hitting rport on tohost,
 # through throughhost
@@ -283,3 +301,101 @@ cat input | xargs -n 1 -P 15 doit.sh
 
 # xargs as non tail argument
 cat input | xargs -I '{}' cmd --foo='{}' --bar=baz
+
+# using a here document as data in a script
+grep $1 <<EOF
+EOF
+
+# prevent shell expansion in a here document, add a slash
+<<\EOF
+EOF
+
+# allow tab indent in here document, use the minus
+<<-EOF
+EOF
+
+# read with a prompt
+read -p "What is your name?" NAME
+
+# read with prompt suppress echo
+read -sp "What is your name?" NAME
+
+# select for multiple choice input
+select foo in $list; do
+  if [ $foo = "whatever"]
+    ...
+    break;
+done
+
+# when you run a process in the background you get a process number
+# and pid
+$ foo &
+[1] 8970
+# the process number can be used to bring the process to the foreground
+$ fg 1
+# if you start a process in the foreground and it is going to take a
+# long time you can make it a background process first by hitting
+# CTRL-Z to pause it and then bg to send it to the background
+
+# launch detached process using nohup
+nohup longproc &
+
+# parameter expansion return value or default if not set
+PATH=${1:-/tmp}
+
+# assign and return if not set or empty
+${HOME:=/tmp}
+# assign and return if not set
+${HOME=/tmp}
+
+# integer math two ways
+X=(( COUNT * 3 ))
+let X=COUNT*3
+
+# three types of while, arithmetic
+while (( COUNT < MAX )); do
+# filetest
+while [ -z "${FILE}" ]; do
+# read
+while read A B; do
+
+# pattern match with [[
+if [[ "${MYFILE}" == *.jpg ]]; then
+# or regex with =~
+if [[ "${MYFILE}" =~ .*\.jpg ]]; then
+
+# will parse out according to separator, putting all remaining
+# in last
+ls -l | while read X Y; do echo $X; done
+
+for ((i=0; i<10; i++); do
+for i in $(seq 1.0 .01 1.1); do
+seq 1.0 .01 1.1 | while read i; do
+for i in {1..12}; do
+
+until [ ]; do
+
+done
+
+# trick for using positional argument parsing
+set -- $(ls -al)
+# now can use $1, $2, ...
+
+# using a function for parsing
+function foo() {
+  PERMS=$1
+  ...
+# invoke to set your variables
+foo $(ls -al ~/some/file)
+# now use your variables
+
+${RANDOM}
+
+# invoke command foo with argument bar suppressing function lookup
+command foo bar
+
+# invoke shell built in without command look up
+builtin cd ~/foo
+
+# null command can be used with variable setting parameter expansions
+: ${FOO:=doggy}
