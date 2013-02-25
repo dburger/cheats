@@ -399,3 +399,10 @@ builtin cd ~/foo
 
 # null command can be used with variable setting parameter expansions
 : ${FOO:=doggy}
+
+# if wait is not given an id, it waits for all currently active
+# child processes to finish
+whatever &
+another &
+wait
+
