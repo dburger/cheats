@@ -406,3 +406,5 @@ whatever &
 another &
 wait
 
+# dump seconds since epoch at beginning of given date
+date -d "$yea/$month/$day" +%s
