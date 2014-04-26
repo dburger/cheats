@@ -406,3 +406,21 @@ whatever &
 another &
 wait
 
+# dump seconds since epoch at beginning of given date
+date -d "$yea/$month/$day" +%s
+
+# example worker script
+#!/usr/bin/env bash                                                                                                                                                                                                
+
+count=0
+while ((count < 100)); do
+  servers=$(foo zork | awk '{print $4":"$3}')
+  num=0
+  for server in $servers; do
+    rpcget "$server/exceptionz?proto" > "out.$count.$num.statusz"
+    ((num++))
+  done
+  echo "Finished round $count, sleeping 10 minutes"
+  sleep 600
+  ((count++))
+done
