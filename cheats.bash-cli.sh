@@ -410,7 +410,7 @@ wait
 date -d "$yea/$month/$day" +%s
 
 # example worker script
-#!/usr/bin/env bash                                                                                                                                                                                                
+#!/usr/bin/env bash
 
 count=0
 while ((count < 100)); do
@@ -424,3 +424,11 @@ while ((count < 100)); do
   sleep 600
   ((count++))
 done
+
+# bash arrays iterative additions
+x=(something)
+x+=(another)
+# expansion
+echo "${x[*]}"
+# when within quotes the prior is a single word, this is separate words
+echo "${x[@]}"
