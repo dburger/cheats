@@ -1,0 +1,29 @@
+# Integration of the exponential distribution probablity density
+# function - special characters, space between to have separate variables.
+Integrate[\[Lambda] E^(-\[Lambda] x)]
+
+# Integration from 0 to x, the cumulative distribution function
+Integrate[\[Lambda] E^(-\[Lambda] u), {u, 0, x}]
+
+# Derivative of e^x
+D[E^x]
+
+# Solving simple equations
+Solve[x^2 + 2x + 1 == 0, x]
+
+# Simple plot
+Plot[2x^2 + 2, {x, -4, 4}]
+
+# Interactive plot with Manipulate
+Manipulate[Plot[a x^2 + 2, {x, -4, 4}], {a, -10, 10}]
+
+# Define a mathematical function
+F[x_] := 3x^2 + 2x + 4
+F[2]
+
+# Quick evaluation
+x^2 /. x->4
+
+# Yeah, factoring
+Factor[x^2 + 3x + 2]
+
