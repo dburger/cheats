@@ -409,6 +409,9 @@ wait
 # dump seconds since epoch at beginning of given date
 date -d "$yea/$month/$day" +%s
 
+# with dashes
+date +%F
+
 # example worker script
 #!/usr/bin/env bash
 
