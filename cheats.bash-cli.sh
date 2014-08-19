@@ -111,6 +111,9 @@ git push origin local-branch-name
 # mail with sendmail compatible send
 mail -s 'pagemon report' to@addr.com -- -F'David J. Burger' --ffrom@addr.com
 
+# don't send if body empty via -E
+somecmd | mail -E -s "the subject" addr@com.com
+
 # simple loop
 for i in *; do ....; .....; done
 
