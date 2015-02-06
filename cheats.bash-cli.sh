@@ -438,3 +438,6 @@ x+=(another)
 echo "${x[*]}"
 # when within quotes the prior is a single word, this is separate words
 echo "${x[@]}"
+
+# sed delete matching lines in place
+find . -name BUILD | xargs sed -i '/"\/\/java\/com\/google\/monitoring\/eye3\/model\/validation"/d'
