@@ -441,3 +441,7 @@ echo "${x[@]}"
 
 # sed delete matching lines in place
 find . -name BUILD | xargs sed -i '/"\/\/java\/com\/google\/monitoring\/eye3\/model\/validation"/d'
+
+# Escaping shell arugments, since single quotes escape everything replace each ' with '\'' and then
+# surround entire argument with single quotes. Example:
+\000\377\$Ux&foo<boo'hi\323 becomes '\000\377\$Ux&foo<boo'\''hi\323'
