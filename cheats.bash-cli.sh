@@ -305,6 +305,9 @@ cat input | xargs -n 1 -P 15 doit.sh
 # xargs as non tail argument
 cat input | xargs -I '{}' cmd --foo='{}' --bar=baz
 
+# xargs one arg at a time, 40 threads, on a randomized file
+sort -R leftovers | xargs -n 1 -P 40 -I '{}' ms delete_rows --ns=eye3.prod --table=PositionsV2 --key='{}'
+
 # using a here document as data in a script
 grep $1 <<EOF
 EOF
