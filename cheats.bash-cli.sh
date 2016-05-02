@@ -451,5 +451,10 @@ find . -name BUILD | xargs sed -i '/"\/\/java\/com\/google\/monitoring\/eye3\/mo
 
 # execute on each found file, one at a time
 $ find . -name '*sh' -exec et {} \;
+# same as
+$ find . -name '*.sh' | xargs et
+
 # execute on each found file, passing all at once
 $ find . -name '*sh' -exec et {} +
+# same as
+$ find . -name '*.sh' | xargs -n 1 et
