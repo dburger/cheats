@@ -448,3 +448,8 @@ find . -name BUILD | xargs sed -i '/"\/\/java\/com\/google\/monitoring\/eye3\/mo
 # Escaping shell arugments, since single quotes escape everything replace each ' with '\'' and then
 # surround entire argument with single quotes. Example:
 \000\377\$Ux&foo<boo'hi\323 becomes '\000\377\$Ux&foo<boo'\''hi\323'
+
+# execute on each found file, one at a time
+$ find . -name '*sh' -exec et {} \;
+# execute on each found file, passing all at once
+$ find . -name '*sh' -exec et {} +
