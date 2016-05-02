@@ -966,3 +966,9 @@ In chisq.test(expected, observed) :
 > # And of course these can be adjusted to sample instead of
 > # population computations with the appropriate adjustment:
 > (previous result) * sum(df$count) / (sum(df$count) - 1)
+
+> # cosine distance with R
+> v1 <- c(1, 2, 3)
+> v2 <- c(1, 2, 3)
+> sum(v1 * v2) / (sqrt(sum(v1^2)) * sqrt(sum(v2^2)))
+[1] 1
