@@ -458,3 +458,6 @@ $ find . -name '*.sh' | xargs et
 $ find . -name '*sh' -exec et {} +
 # same as
 $ find . -name '*.sh' | xargs -n 1 et
+
+# sed example large in place edit
+grep -rlI "import com.google.monitoring.eye3.common.persistence.Datastores" . | xargs sed -i 's/import com.google.monitoring.eye3.common.persistence.Datastores/import com.google.monitoring.eye3.persistence.Datastores/'
