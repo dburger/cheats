@@ -461,3 +461,6 @@ $ find . -name '*.sh' | xargs -n 1 et
 
 # sed example large in place edit
 grep -rlI "import com.google.monitoring.eye3.common.persistence.Datastores" . | xargs sed -i 's/import com.google.monitoring.eye3.common.persistence.Datastores/import com.google.monitoring.eye3.persistence.Datastores/'
+
+# sed example delete matching lines
+$ find . -name BUILD | xargs sed -i '/ui:mock/d'
