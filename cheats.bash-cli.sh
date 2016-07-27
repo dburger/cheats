@@ -70,7 +70,7 @@ sed -e 's/<option value=\(....\)>\(.*\)/put(\1, "\2");/g' countries.txt
 sed -i[bak] -e 's/, ,/,,/g' hotspot-list2.txt
 
 # recursive in place edit, no backup, of X with Y, grep is better here than find
-grep -rl | xargs sed -i 's/X/Y/g'
+grep -rl 'X' | xargs sed -i 's/X/Y/g'
 
 # another fancy rename making *-consolidated.xls consolidated-*.xls
 ls *consolidated.xls | sed 's/\(.*\)-consolidated.xls/mv \0 consolidated-\1.xls/' | sh
