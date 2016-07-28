@@ -467,3 +467,6 @@ $ find . -name BUILD | xargs sed -i '/ui:mock/d'
 
 # what imports are used among several different files
 $ grep -h import | sort -u
+
+# what is running on port 8080?
+$ netstat -t | grep 8080
