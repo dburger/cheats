@@ -464,3 +464,6 @@ grep -rlI "import com.google.monitoring.eye3.common.persistence.Datastores" . | 
 
 # sed example delete matching lines
 $ find . -name BUILD | xargs sed -i '/ui:mock/d'
+
+# what imports are used among several different files
+$ grep -h import | sort -u
