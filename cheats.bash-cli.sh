@@ -473,3 +473,8 @@ $ netstat -t | grep 8080
 
 # combo for work
 $ lockserv resolveall /abns/docs/kix-scary-canary.frontend | cut -d' ' -f2,3 | sed -e 's/ /:/' | xargs -I '{}' echo "rpcget http://{}/protostatusz?messages&mode=proto" > foo.txt
+
+# nmcli
+nmcli device wifi list
+nmcli device wifi connect pookie5g -a
+nmcli -f name -t connection show --active
