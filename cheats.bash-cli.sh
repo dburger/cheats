@@ -478,3 +478,7 @@ $ lockserv resolveall /abns/docs/kix-scary-canary.frontend | cut -d' ' -f2,3 | s
 nmcli device wifi list
 nmcli device wifi connect pookie5g -a
 nmcli -f name -t connection show --active
+
+# change delimiter in sed when address is first
+# start with backslash
+$ find . -name BUILD | xargs sed -i '\|foo|d'
