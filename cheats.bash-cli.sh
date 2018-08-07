@@ -482,3 +482,9 @@ nmcli -f name -t connection show --active
 # change delimiter in sed when address is first
 # start with backslash
 $ find . -name BUILD | xargs sed -i '\|foo|d'
+
+# Showing file system usage disk space usage
+$ df -HT
+
+# Showing disks
+$ fdisk -l
