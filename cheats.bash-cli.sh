@@ -490,4 +490,4 @@ $ df -HT
 $ fdisk -l
 
 # sed delete bash style comments and blank lines
-$ sed "s/\s*#.*//g; /^$/ d" file.txt
+$ sed "s/\s*#.*//g; /^$/d" file.txt
