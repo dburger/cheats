@@ -491,3 +491,8 @@ $ fdisk -l
 
 # sed delete bash style comments and blank lines
 $ sed "s/\s*#.*//g; /^$/d" file.txt
+
+# Generating random numbers
+$ echo $RANDOM
+# In a range
+$ echo $(( RANDOM % 100 ))
