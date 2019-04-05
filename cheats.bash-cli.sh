@@ -496,3 +496,14 @@ $ sed "s/\s*#.*//g; /^$/d" file.txt
 $ echo $RANDOM
 # In a range
 $ echo $(( RANDOM % 100 ))
+
+# Shuffle a file
+$ shuf file.txt
+# Only take ten lines of the file
+$ shuf file.txt -n 10
+# Shuffle a range of numbers instead
+$ shuf -i 10-20
+# Just take one of the range
+$ shuf -i 1000-2000 -n 1
+# Take ten samples and allow repeats
+$ shuf -i 1-20 -n 10 -r
