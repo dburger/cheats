@@ -518,3 +518,11 @@ $ shuf -i 1-20 -n 10 -r
 # Run a command after debian package update
 
 echo "post-invoke='sudo -u $USER dmenu_path > /dev/null'" > /etc/dpkg/dpkg.cfg.d/dmenu-path-update-hook
+
+# Run a command when files change
+
+Install [entr](http://entrproject.org) and then:
+
+```bash
+$ find . -name '*star' | entr ./regenerate_configs.sh
+```
