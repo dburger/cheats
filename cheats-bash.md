@@ -1,4 +1,4 @@
-# examples, examples, and more examples?
+# Bash Cheat Sheet
 
 # make it so that any non-zero exit code will exit the script
 set -e
@@ -59,36 +59,6 @@ umask
 
 # change mask so that everyone gets read and execute but not write
 umask 0022
-
-# rename a bunch of files from a prefix + number to just the number
-ls QuizUI_* | sed 's/Quiz\(UI_[0-9][0-9]\.png\)/mv Quiz\1 \1/' | sh
-
-# chop up a web page changing a <option> list into a couple of columns
-sed -e 's/<option value=\(....\)>\(.*\)/put(\1, "\2");/g' countries.txt
-
-# in place edit with backup remove single space in CSV column
-sed -i[bak] -e 's/, ,/,,/g' hotspot-list2.txt
-
-# recursive in place edit, no backup, of X with Y, grep is better here than find
-grep -rl 'X' | xargs sed -i 's/X/Y/g'
-
-# another fancy rename making *-consolidated.xls consolidated-*.xls
-ls *consolidated.xls | sed 's/\(.*\)-consolidated.xls/mv \0 consolidated-\1.xls/' | sh
-
-# remove from { to } in a text file spanning multiple lines, used to clean up
-# an informix DDL for usage with SQL Server, derived from sed one liners page
-sed -e ':a;s/{[^}]*}//g;/{/N;/{/ba' input.ddl
-
-# output lines from line 1 to line 1000 to a file
-sed -n '1,1000 p' file > output
-# what? why not just
-head -1000
-
-# output a range of a file turning on with first regex and off with second
-sed -n '/Starting analysis mailing.*30379003/,/Completed analysis mailing.*30379003/p' gse.log-2010_11_17_19_11_46
-
-# add line numbers to the output and then dump the range
-cat -n foo.txt | sed -n "/start/,/finish/p"
 
 # fetchmail forward to dburger@camberhawaii.org every 5 minutes from dburger
 # account at ip
@@ -262,9 +232,6 @@ digraph G {
   execute -> compare;
 }
 $ dot -Tpng -o deps.png input.dot
-
-# example bulk import change with sed, will leave .BAK backup files
-find . -name "*java" | xargs grep -l "com\.google\.gwt\.event\.shared\.SimpleEventBus" | xargs sed -i.BAK 's/com\.google\.gwt\.event\.shared\.SimpleEventBus/com.google.web.bindery.event.shared.SimpleEventBus/'
 
 # use awk to produce average from stream
 grep "^110513 04.*Task completed in" gse.log | \
@@ -442,9 +409,6 @@ echo "${x[*]}"
 # when within quotes the prior is a single word, this is separate words
 echo "${x[@]}"
 
-# sed delete matching lines in place
-find . -name BUILD | xargs sed -i '/"\/\/java\/com\/google\/monitoring\/eye3\/model\/validation"/d'
-
 # Escaping shell arugments, since single quotes escape everything replace each ' with '\'' and then
 # surround entire argument with single quotes. Example:
 \000\377\$Ux&foo<boo'hi\323 becomes '\000\377\$Ux&foo<boo'\''hi\323'
@@ -458,12 +422,6 @@ $ find . -name '*.sh' | xargs et
 $ find . -name '*sh' -exec et {} +
 # same as
 $ find . -name '*.sh' | xargs -n 1 et
-
-# sed example large in place edit
-grep -rlI "import com.google.monitoring.eye3.common.persistence.Datastores" . | xargs sed -i 's/import com.google.monitoring.eye3.common.persistence.Datastores/import com.google.monitoring.eye3.persistence.Datastores/'
-
-# sed example delete matching lines
-$ find . -name BUILD | xargs sed -i '/ui:mock/d'
 
 # what imports are used among several different files
 $ grep -h import | sort -u
@@ -479,31 +437,81 @@ nmcli device wifi list
 nmcli device wifi connect pookie5g -a
 nmcli -f name -t connection show --active
 
-# change delimiter in sed when address is first
-# start with backslash
-$ find . -name BUILD | xargs sed -i '\|foo|d'
-
 # Showing file system usage disk space usage
 $ df -HT
 
 # Showing disks
 $ fdisk -l
 
+# change delimiter in sed when address is first
+# start with backslash
+$ find . -name BUILD | xargs sed -i '\|foo|d'
+
+# rename a bunch of files from a prefix + number to just the number
+ls QuizUI_* | sed 's/Quiz\(UI_[0-9][0-9]\.png\)/mv Quiz\1 \1/' | sh
+
+# chop up a web page changing a <option> list into a couple of columns
+sed -e 's/<option value=\(....\)>\(.*\)/put(\1, "\2");/g' countries.txt
+
+# in place edit with backup remove single space in CSV column
+sed -i[bak] -e 's/, ,/,,/g' hotspot-list2.txt
+
+# recursive in place edit, no backup, of X with Y, grep is better here than find
+grep -rl 'X' | xargs sed -i 's/X/Y/g'
+
+# another fancy rename making *-consolidated.xls consolidated-*.xls
+ls *consolidated.xls | sed 's/\(.*\)-consolidated.xls/mv \0 consolidated-\1.xls/' | sh
+
+# remove from { to } in a text file spanning multiple lines, used to clean up
+# an informix DDL for usage with SQL Server, derived from sed one liners page
+sed -e ':a;s/{[^}]*}//g;/{/N;/{/ba' input.ddl
+
+# output lines from line 1 to line 1000 to a file
+sed -n '1,1000 p' file > output
+# what? why not just
+head -1000
+
+# output a range of a file turning on with first regex and off with second
+sed -n '/Starting analysis mailing.*30379003/,/Completed analysis mailing.*30379003/p' gse.log-2010_11_17_19_11_46
+
+# add line numbers to the output and then dump the range
+cat -n foo.txt | sed -n "/start/,/finish/p"
+
 # sed delete bash style comments and blank lines
 $ sed "s/\s*#.*//g; /^$/d" file.txt
 
-# Generating random numbers
-$ echo $RANDOM
-# In a range
-$ echo $(( RANDOM % 100 ))
+# sed example large in place edit
+grep -rlI "import com.google.monitoring.eye3.common.persistence.Datastores" . | xargs sed -i 's/import com.google.monitoring.eye3.common.persistence.Datastores/import com.google.monitoring.eye3.persistence.Datastores/'
 
-# Shuffle a file
+# sed example delete matching lines
+$ find . -name BUILD | xargs sed -i '/ui:mock/d'
+
+# sed delete matching lines in place
+find . -name BUILD | xargs sed -i '/"\/\/java\/com\/google\/monitoring\/eye3\/model\/validation"/d'
+
+# example bulk import change with sed, will leave .BAK backup files
+find . -name "*java" | xargs grep -l "com\.google\.gwt\.event\.shared\.SimpleEventBus" | xargs sed -i.BAK 's/com\.google\.gwt\.event\.shared\.SimpleEventBus/com.google.web.bindery.event.shared.SimpleEventBus/'
+
+# Generating random numbers
+
+```bash
+$ # Between 0 and 32767
+$ echo $RANDOM
+$ # In a range using a modulus
+$ echo $(( RANDOM % 100 ))
+```
+
+# Shuffling a file, or generating random numbers
+
+```bash
+$ # Just shuffle the lines of a file
 $ shuf file.txt
-# Only take ten lines of the file
+$ # Only take ten lines of the file
 $ shuf file.txt -n 10
-# Shuffle a range of numbers instead
+$ # Shuffle a range of numbers instead
 $ shuf -i 10-20
-# Just take one of the range
+$ # Just take one of the range
 $ shuf -i 1000-2000 -n 1
-# Take ten samples and allow repeats
+$ # Take ten samples and allow repeats
 $ shuf -i 1-20 -n 10 -r
+```
