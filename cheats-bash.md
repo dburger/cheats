@@ -224,6 +224,17 @@ $ gs -q -sPAPERSIZE=letter -dNOPAUSE -dBATCH -sDEVICE=pdfwrite \
 > -sOutputFile=out.pdf page1.pdf page2.pdf
 ```
 
+## Show systems IP address
+
+```bash
+$ # Old way
+$ ifconfig
+$
+$ # New way
+$ ip addr show
+$ ip addr show eth0
+```
+
 ## Set up ethernet card from command line
 
 ```bash
@@ -608,9 +619,12 @@ surround entire argument with single quotes. Example:
 $ grep -h import | sort -u
 ```
 
-## What is running on port 8080?
+## What is listening / running on ports...
 
 ```bash
+$ netstat -tulpn
+$
+$ # What is running on port 8080?
 $ netstat -t | grep 8080
 ```
 
@@ -638,8 +652,13 @@ $ nmcli -f name -t connection show --active
 ```bash
 $ # Show file system usage disk space usage
 $ df -HT
+$ df -ah
+$
 $ # Show disks
 $ fdisk -l
+$
+$ # Size of directory's contents
+$ du -sh dir/
 ```
 
 # Change delimiter in sed, when address is first start with backslash
