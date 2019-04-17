@@ -766,4 +766,7 @@ $ jq '.configs[] | select(.id.name == "charlie") | .guide.children' file.json
 $
 $ # Select top level key "master" and output its configs property
 $ jq '.["master"].configs' file.json
+$
+$ # Output the .foo.bar and .status fields, followed by a record separator, used as pipe
+$ some fetch | jq '.foo.bar, .status, "=========="'
 ```
