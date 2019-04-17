@@ -756,3 +756,14 @@ $ # (note, "sudo apt-get install exuberant-ctags", this is not standard
 $ #  etags / ctags syntax)
 $ ctags --exclude=blaze* -e -R .
 ```
+## jq JSON parsing magic
+
+```bash
+$ # For each element under the top level configs key,
+$ # process it only if .id.name is charlie,
+$ # then output its .guide.children property
+$ jq '.configs[] | select(.id.name == "charlie") | .guide.children' file.json
+$
+$ # Select top level key "master" and output its configs property
+$ jq '.["master"].configs' file.json
+```
