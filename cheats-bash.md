@@ -200,6 +200,8 @@ $ # Produce average from stream
 $ grep "^110513 04.*Task completed in" gse.log | \
 > sed 's/^.*Task completed in \([0-9]*\) .*$/\1/' | \
 > awk '{total+=$1; count+=1} END {print total/count}'
+$ # Undo changes to .json repo files that are staged
+$ git status | grep json | awk '{print $2}' | xargs git checkout
 ```
 
 ## Change jpg to pdf using ImageMagick
