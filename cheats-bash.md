@@ -558,6 +558,8 @@ $ # Dump seconds since epoch at beginning of given date
 $ date -d "$yea/$month/$day" +%s
 $ # with dashes
 $ date +%F
+$ # Get epoch seconds for time in LA timezone
+$ date --date='TZ="America/Los_Angeles" 2019-11-15 06:59:19' +%s
 ```
 
 ## Example worker script
