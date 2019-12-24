@@ -773,4 +773,10 @@ $ jq '.["master"].configs' file.json
 $
 $ # Output the .foo.bar and .status fields, followed by a record separator, used as pipe
 $ some fetch | jq '.foo.bar, .status, "=========="'
+$
+$ # For each element under top level builderConfigs key, run the select
+$ # which will output a new array of the elements that matched. Here only
+$ # one would in theory match and its .general.critical value would be
+$ # output.
+$ jq ".builderConfigs | map(select(.id.name == \"grunt-cq\"))[0].general.critical" file.json
 ```
