@@ -780,3 +780,11 @@ $ # one would in theory match and its .general.critical value would be
 $ # output.
 $ jq ".builderConfigs | map(select(.id.name == \"grunt-cq\"))[0].general.critical" file.json
 ```
+
+## Change line input to comma separated
+
+-s for serial, one file at a time, and -d to change the delimiter to a comma.
+
+```bash
+cat input.txt | paste -sd ,
+```
