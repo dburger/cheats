@@ -783,8 +783,11 @@ $ jq ".builderConfigs | map(select(.id.name == \"grunt-cq\"))[0].general.critica
 
 ## Change line input to comma separated
 
--s for serial, one file at a time, and -d to change the delimiter to a comma.
-
 ```bash
-cat input.txt | paste -sd ,
+# With xargs and sed:
+$ cat input.txt | xargs echo | sed -e 's/ /,/g'
+# With paste,
+# -s for serial, one file at a time, and -d to change the 
+# delimiter to a comma.
+$ cat input.txt | paste -sd ,
 ```
