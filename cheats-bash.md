@@ -13,6 +13,16 @@ $ # Even when noclobber is on you can override with >|
 $ echo "whatever" >|filename.txt
 ```
 
+## Common set options for all scripts
+
+```bash
+set -euo pipefail
+```
+
+*   `-e` for exit on errors
+*   `-u` for exit on unset variables
+*   `-o pipefail` for exit if any part of a pipe fails
+
 ## Some echo options
 
 ```bash
