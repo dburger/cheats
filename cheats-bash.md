@@ -614,6 +614,21 @@ while ((count < 100)); do
 done
 ```
 
+## Inline array creation and iteration
+
+```bash
+repos=(
+    "repo1"
+    "repo2"
+    "repo3"
+)
+
+for repo in "${repos[@]}"; do
+  echo "${repo}"
+  # ...
+done
+```
+
 ## Bash arrays iterative additions
 
 ```bash
