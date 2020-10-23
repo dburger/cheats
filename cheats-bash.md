@@ -515,6 +515,16 @@ $ # Launch a detached process using nohup
 $ nohup longproc &
 ```
 
+## if conditional grep command output
+
+```bash
+if grep -q needle <<< $(curl http://what.com); then
+  echo "Found the needle!"
+else
+  echo "Didn't find the needle!"
+fi
+```
+
 ## Parameter expansion
 
 ```bash
