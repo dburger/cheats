@@ -477,6 +477,29 @@ select foo in $list; do
 done
 ```
 
+## Reading from stdin with a read loop
+
+```bash
+#!/usr/bin/env bash
+
+# Invoke as $0 < something.txt
+
+while read -r line; do
+  echo "${line}"
+  # ...
+done
+```
+
+## Using read and the IFS to "split"
+
+```bash
+value='world/wide'
+IFS='/'
+read -r -a values <<< "${value}"
+location="${values[0]}"
+region="${values[1]}"
+```
+
 ## Process control
 
 ```bash
