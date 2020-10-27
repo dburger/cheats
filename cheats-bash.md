@@ -23,6 +23,27 @@ set -euo pipefail
 *   `-u` for exit on unset variables
 *   `-o pipefail` for exit if any part of a pipe fails
 
+## Accumulate command and execute pattern
+
+This pattern builds a command in an array and then executes it.
+(Contrived example building up an ls command.)
+
+```bash
+# Build it up.
+cmd=(ls)
+if [[ "${all}" == "true" ]]; then
+  cmd+=(-a)
+fi
+if [[ "${list}" == "true" ]]; then
+  cmd+=(-l)
+fi
+if [[ -n "${filespec}" ]]; then
+  cmd+=("${filespec}")
+fi
+# Execute it.
+"${cmd[@]}"
+```
+
 ## Some echo options
 
 ```bash
