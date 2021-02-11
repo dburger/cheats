@@ -587,7 +587,7 @@ $ ls -l | while read X Y; do echo $X; done
 # for loops
 
 ```bash
-$ for ((i=0; i<10; i++); do something; done
+$ for ((i=0; i<10; i++)); do something; done
 $ for i in $(seq 1.0 .01 1.1); do something; done
 $ seq 1.0 .01 1.1 | while read i; do something; done
 $ for i in {1..12}; do something; done
