@@ -584,6 +584,14 @@ while read A B; do
 $ ls -l | while read X Y; do echo $X; done
 ```
 
+# Read a string separating by newlines
+
+```bash
+while IFS= read -r path; do
+  echo "We got a line with ${path}"
+done <<< "${NAUTILUS_SCRIPT_SELECTED_FILE_PATHS}"
+```
+
 # for loops
 
 ```bash
