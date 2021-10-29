@@ -878,3 +878,11 @@ $ cat input.txt | xargs echo | sed -e 's/ /,/g'
 # delimiter to a comma.
 $ cat input.txt | paste -sd ,
 ```
+
+## Execute command for each line of a file
+
+```bash
+$ while read url; do   youtube-dl "${url}"; done <playlist.txt
+```
+
+Many other possibilities described (here)[https://stackoverflow.com/questions/13939038/how-do-you-run-a-command-for-each-line-of-a-file].
