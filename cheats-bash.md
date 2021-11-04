@@ -1,5 +1,12 @@
 # Bash Cheat Sheet
 
+## System Information
+
+```bash
+$ # Bunch of stuff including kernel version
+$ uname -a
+```
+
 ## Some set options
 
 ```bash
