@@ -893,3 +893,15 @@ $ while read url; do   youtube-dl "${url}"; done <playlist.txt
 ```
 
 Many other possibilities described [here](https://stackoverflow.com/questions/13939038/how-do-you-run-a-command-for-each-line-of-a-file).
+
+## Command line text to speech
+
+```bash
+$ # With festival installed, the following will play directly
+$ festival --tts file.txt
+$ # and to save to a file
+$ text2wav file.txt -o file.wav
+$
+$ # Or with gtts installed
+$ gtts-cli -f file.txt -o out.mp3
+```
