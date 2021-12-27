@@ -905,3 +905,18 @@ $
 $ # Or with gtts installed
 $ gtts-cli -f file.txt -o out.mp3
 ```
+
+## Setting up Loopback Video
+
+```bash
+$ # see what video devices you already have
+$ ls -al /dev/video*
+$ # install the kernel module
+$ sudo modprobe v4l2loopback devices=1 video_nr=0 card_label="Loopback Cam" exclusive_caps=1
+$ # take another look, what video devices do you have now?
+$ ls -al /dev/video*
+$ # shove a youtube video through it with ffmpeg
+$ ffmpeg -re -i $(youtube-dl -g -f 134 https://www.youtube.com/watch?v=-bUTcioLNys) -f v4l2 /dev/video2
+$ # and play it from another shell (it does not do audio)
+$ ffplay /dev/video2
+```
