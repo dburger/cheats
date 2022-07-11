@@ -921,6 +921,29 @@ $ # and play it from another shell (it does not do audio)
 $ ffplay /dev/video2
 ```
 
+## Example script with counting / math loop
+
+```bash
+#!/usr/bin/env bash
+
+misses=0
+
+while (( misses < 3 )); do
+    sleep 10
+    if curl -s https://www.cbs.com/shows/the_bold_and_the_beautiful/ | grep -q "Brooke and Ridge share a heart wrenching goodbye."; then
+	echo "Found it."
+	misses=0
+    else
+	(( misses=misses + 1 ))
+	echo "Not found, ${misses} times."
+    fi
+done
+
+echo "Didn't find it."
+
+
+```
+
 ## Example custom argument parsing
 
 ```bash
