@@ -938,7 +938,7 @@ Unlike other devices in linux, camera devices (/dev/video0) are not shareable. S
 you have a reason to show it in google chat, cheese, and OBS Studio at the same time.
 While the device itself is not share the loopback video / virtual camera as described
 above is. This is well described in
-(V4L2Loopback: Virtual Cameras Make My Life Simple)[https://www.youtube.com/watch?v=pKLVNcP0wsk].
+[V4L2Loopback: Virtual Cameras Make My Life Simple](https://www.youtube.com/watch?v=pKLVNcP0wsk).
 
 First set up the loopback video / virtual camera as above. Then push your webcam
 through your new virtual device. Say the virtual device is mounted as /dev/video5:
