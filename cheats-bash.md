@@ -591,7 +591,7 @@ while read A B; do
 $ ls -l | while read X Y; do echo $X; done
 ```
 
-# Read a string separating by newlines
+# Read from a string variable, separating by newlines
 
 ```bash
 while IFS= read -r path; do
