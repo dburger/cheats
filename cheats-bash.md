@@ -1028,3 +1028,13 @@ echo "got the lock"
 sleep 60
 ) 200>"/var/lock/${SCRIPT}.lock"
 ```
+
+## Clean up on exit with trap
+
+```bash
+scratch=$(mktemp -d -t tmp.XXXXXXXXXX)
+function finish {
+  rm -rf "$scratch"
+}
+trap finish EXIT
+```
