@@ -591,7 +591,7 @@ while read A B; do
 $ ls -l | while read X Y; do echo $X; done
 ```
 
-# Read a string separating by newlines
+# Read from a string variable, separating by newlines
 
 ```bash
 while IFS= read -r path; do
@@ -906,20 +906,49 @@ $ # Or with gtts installed
 $ gtts-cli -f file.txt -o out.mp3
 ```
 
-## Setting up Loopback Video
+## Setting up Loopback Video / Virtual Camera
+
+One of the primary reasons you might set up a virtual camera is that
+you can push OBS Studio output through it. Then you can connect another
+app to the virtual camera, allowing you to serve up OBS Studio enhanced
+content. For example you could connect google chat to this output and
+provide a greatly enhanced chat. To set up your virtual camera:
 
 ```bash
 $ # see what video devices you already have
 $ ls -al /dev/video*
-$ # install the kernel module
-$ sudo modprobe v4l2loopback devices=1 video_nr=0 card_label="Loopback Cam" exclusive_caps=1
+$ # install the kernel module, loopback will appear as /dev/video5
+$ sudo modprobe v4l2loopback devices=1 video_nr=5 card_label="Loopback Cam" exclusive_caps=1
 $ # take another look, what video devices do you have now?
 $ ls -al /dev/video*
-$ # shove a youtube video through it with ffmpeg
-$ ffmpeg -re -i $(youtube-dl -g -f 134 https://www.youtube.com/watch?v=-bUTcioLNys) -f v4l2 /dev/video2
-$ # and play it from another shell (it does not do audio)
-$ ffplay /dev/video2
 ```
+
+Now to prove that it is working, let's shove a video through it.
+
+```bash
+$ # shove a youtube video through it with ffmpeg
+$ ffmpeg -re -i $(youtube-dl -g -f 134 https://www.youtube.com/watch?v=-bUTcioLNys) -f v4l2 /dev/video5
+$ # and play it from another shell (it does not do audio)
+$ ffplay /dev/video5
+```
+
+## Make your camera device shareable
+
+Unlike other devices in linux, camera devices (/dev/video0) are not shareable. Say if
+you have a reason to show it in google chat, cheese, and OBS Studio at the same time.
+While the device itself is not share the loopback video / virtual camera as described
+above is. This is well described in
+[V4L2Loopback: Virtual Cameras Make My Life Simple](https://www.youtube.com/watch?v=pKLVNcP0wsk).
+
+First set up the loopback video / virtual camera as above. Then push your webcam
+through your new virtual device. Say the virtual device is mounted as /dev/video5:
+
+```bash
+ffmpeg -i /dev/video0 -f v4l2 -vcodec rawvideo -pix_fmt rgb24 /dev/video5
+```
+
+Now /dev/video5 should be a shareable video device of the feed coming off your
+webcam.
 
 ## Example script with counting / math loop
 
@@ -1006,4 +1035,14 @@ sleep 60
 $ # Go into each subdir, dump the git status, capture stderr
 $ # and stdout into status.txt.
 $ for dir in */; do cd $dir; echo $dir; git status; echo ""; cd ..; done > status.txt 2>&1
+```
+
+## Clean up on exit with trap
+
+```bash
+scratch=$(mktemp -d -t tmp.XXXXXXXXXX)
+function finish {
+  rm -rf "$scratch"
+}
+trap finish EXIT
 ```
