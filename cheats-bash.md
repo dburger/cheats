@@ -999,3 +999,11 @@ echo "got the lock"
 sleep 60
 ) 200>"/var/lock/${SCRIPT}.lock"
 ```
+
+## Looping directories
+
+```bash
+$ # Go into each subdir, dump the git status, capture stderr
+$ # and stdout into status.txt.
+$ for dir in */; do cd $dir; echo $dir; git status; echo ""; cd ..; done > status.txt 2>&1
+```
