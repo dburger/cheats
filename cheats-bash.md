@@ -1046,3 +1046,12 @@ function finish {
 }
 trap finish EXIT
 ```
+
+## Watch some output and alert on a change
+
+```bash
+$ # -n Re-run every 20 seconds
+$ # -g exit on a change
+$ # followed by using aplay to play a sound when the command exits
+$ watch -n 20 -g ./bin/oddsjam --minPercent 2.0 --maxWidth 60 --maxOdds 210; aplay /usr/lib/libreoffice/share/gallery/sounds/train.wav
+```
