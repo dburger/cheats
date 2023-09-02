@@ -972,3 +972,150 @@ In chisq.test(expected, observed) :
 > v2 <- c(1, 2, 3)
 > sum(v1 * v2) / (sqrt(sum(v1^2)) * sqrt(sum(v2^2)))
 [1] 1
+
+
+> # quantiles, with no argument gives quartiles
+> quantile(v1)
+   0%   25%   50%   75%  100%
+ 1.00  3.25  5.50  7.75 10.00
+> # otherwise you can specify the quantile you want
+> quantile(v1, .75)
+ 75%
+7.75
+> # and in R fashion can provide several
+> quantile(v1, c(0.5, 0.95))
+ 50%  95%
+5.50 9.55
+
+> # convert a vector to Z-scores
+> scale(v1)
+
+> # Given a vector sample of a population, test the
+> # possibility of a given mean
+> t.test(v1, mu=6.8)
+  One Sample t-test
+
+data:  v1
+t = -1.3578, df = 9, p-value = 0.2076
+alternative hypothesis: true mean is not equal to 6.8
+95 percent confidence interval:
+ 3.334149 7.665851
+sample estimates:
+mean of x
+      5.5
+> # a p-value of 0.2076 does not rule out the possibility
+> # that 6.8 could be the mean for the population.
+
+> # you have a sample from a population, and you want a
+> # confidence interval for the mean
+> t.test(v1)
+> # note that the output will include a 95 percent confidence
+> # interval. You can also change the percent obviously.
+> t.test(v1, conf.level=0.99)
+
+> # Calculate a confidence interval for the median for a sample
+> # from a population
+> wilcox.test(v1, conf.int=TRUE)
+
+> # Calculate the likelihood of a given success proportion from
+> # a sample of a population
+> prop.test(x, n, p)
+> # where x is successes in the sample
+> # n is the number of trials in the sample
+> # p is the proportion you are testing likelihood of
+
+> # Confidence interval on the proportion given that the sample
+> # contains x successes in n trials
+> prop.test(x, n)
+
+> # Test if a data sample is likely from a normal distribution
+> shapiro.test(v1)
+
+> # Test if the samples from two different populations have the
+> # same mean
+> t.test(x, y)
+> # or
+> t.test(x, y, paired=TRUE)
+
+> # Test correlation
+> cor.test(x, y)
+
+> # Testing groups for equal proportions
+> # ns - vector number of successes
+> # nt - vector number of trials
+> prop.test(ns, nt)
+
+> # Pairwise mean comparison uses parallel vectors
+> # one for values and one for the identifying factor
+> pairwise.t.test(v1, v2)
+
+> # Test whether two samples were drawn from the same
+> # distribution
+> ks.test(x, y)
+
+> # Plots for the related variables per factor
+> coplot(x ~ y | f)
+
+> # Getting the lower bounds of the confidence interval
+> # in a vector
+> lower <- tapply(Temp, Month,
+    func(v) t.test(v)$conf.int[1])
+
+> # Generating colors for charts
+> gray(v)
+> rainbow(v)
+
+> # Adding vertical or horizontal lines
+> abline(v=x)
+> abline(h=x)
+
+> # Adding a density curve to a histogram of a 500 random samples
+> # from a gamma distribution.
+> samp <- rgamma(500, 2, 2)
+> hist(samp, 20, prob=TRUE)
+> lines(density(samp))
+
+> # Plotting curves
+> curve(sin, -3, +3)
+
+> # Set up plotting parameters to pause between each plot
+> par(ask=TRUE)
+
+> # Multiple plots on the some output window, first set up
+> # the grid you will set the plots into
+> par(mfrow=c(2, 2))
+> # now each call to draw a plot will go into the next grid
+> # location
+> plot(x)
+
+> # Saving a plot after generated
+> savePlot(filename="filename", type="png")
+
+> # Conditioning plot, plot y related to x per factor for
+> # the data frame
+> coplot(y ~ x | f, data=df)
+
+> # Generate the lower bounds by month for temperature data
+> lower <- tapply(Temp, Month, function(v) t.test(v)$conf.int[1])
+
+> # Addition of horizontal and vertical lines
+> abline(h=4)
+> abline(v=-2)
+
+> # Generate shades / colors for plots, for gray
+> # must pass [0, 1], 0 == black, 1 == white
+> gray(x)
+> # rainbow takes a count to generate and then other parameters
+> rainbow(x)
+
+> # Compute row and column sums
+> rowSums(x)
+> colSums(x)
+> # and tack them on say a data frame
+> mtcars <- rbind(mtcars, colSums(mtcars))
+
+> # Index of min and max elements
+> which.min(v1)
+> which.max(v1)
+
+cut and match dammit
