@@ -1035,6 +1035,8 @@ sleep 60
 $ # Go into each subdir, dump the git status, capture stderr
 $ # and stdout into status.txt.
 $ for dir in */; do cd $dir; echo $dir; git status; echo ""; cd ..; done > status.txt 2>&1
+$ # Same thing, but use a subshell to undo the cd before proceeding to the next:
+$ for dir in */; do ( cd $dir; echo $dir; git status; echo ""; ) ; done > status.txt 2>&1
 ```
 
 ## Clean up on exit with trap
